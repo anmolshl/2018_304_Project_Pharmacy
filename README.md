@@ -9,7 +9,7 @@ Proposal:
 
 	We will be creating a database management system outlining a pharmacy’s inventory, in order `	to aid both customers and pharmacists alike. 
 	
-	
+	    z
 						
 					 					
 o What is the domain of the application?
