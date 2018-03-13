@@ -104,4 +104,67 @@ CREATE TABLE drug_cures_illness
   FOREIGN KEY(illness_name) REFERENCES Illness(illness_name),
   FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name));
 
+CREATE TABLE drug_has_warning
+  (warning CHAR(30) NOT NULL,
+  drug_name CHAR(20) NOT NULL,
+  FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name)
+  ON DELETE CASCADE,
+  FOREIGN KEY(warning) REFERENCES Warning(warning),
+  PRIMARY KEY(warning, drug_name));
 
+CREATE TABLE Illness_has_symptom
+  (symptom CHAR(30) NOT NULL,
+  illness_name CHAR(20) NOT NULL,
+  PRIMARY KEY(symptom, illness_name),
+  FOREIGN KEY(symptom) REFERENCES Symptom(symptom)
+  ON DELETE CASCADE,
+  FOREIGN KEY(illness_name) REFERENCES Illness(illness_name));
+
+CREATE TABLE drugs_has_side_effects
+  (effect CHAR(30) NOT NULL,
+  drug_name CHAR(20) NOT NULL,
+  PRIMARY KEY(effect, drug_name),
+  FOREIGN KEY(effect) REFERENCES Side_effects(effect)
+  ON DELETE CASCADE,
+  FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name));
+
+CREATE TABLE stock_stores_drugs
+  (quantity INTEGER NOT NULL,
+  stock_ID INTEGER NOT NULL,
+  drug_name CHAR(20) NOT NULL,
+  FOREIGN KEY(stock_ID) REFERENCES Stock(stock_ID),
+  FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name),
+  PRIMARY KEY(stock_ID));
+
+CREATE TABLE stores_contains_stocks
+  (stock_ID INTEGER NOT NULL,
+  store_location CHAR(20) NOT NULL,
+  store_address CHAR(30) NOT NULL,
+  PRIMARY KEY(stock_ID, store_location, store_address),
+  FOREIGN KEY(stock_ID) REFERENCES Stock(stock_ID),
+  FOREIGN KEY(store_location, store_address) REFERENCES Store(store_location, store_address));
+
+CREATE TABLE Prescription_orders
+  (store_location CHAR(20) NOT NULL,
+  username CHAR(16) NOT NULL,
+  store_address CHAR(30) NOT NULL,
+  drug_name CHAR(20) NOT NULL,
+  refill INTEGER NOT NULL,
+  expiration DATE NOT NULL,
+  customer_number INTEGER NOT NULL,
+  prescription_number INTEGER NOT NULL,
+  issued_date DATE NOT NULL,
+  dosage INTEGER NOT NULL,
+  FOREIGN KEY(customer_number, username) REFERENCES Customer(customer_number, username)
+  ON DELETE CASCADE,
+  FOREIGN KEY(store_location, store_address) REFERENCES Store(store_location, store_address),
+  FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name),
+  PRIMARY KEY(prescription_number));
+
+CREATE TABLE customer_has_prescription
+  (customer_number INTEGER NOT NULL,
+  username CHAR(16) NOT NULL,
+  prescription_number INTEGER NOT NULL,
+  PRIMARY KEY(customer_number, prescription_number),
+  FOREIGN KEY(customer_number, username) REFERENCES Customer(customer_number, username),
+  FOREIGN KEY(prescription_number) REFERENCES Prescription(prescription_number));
