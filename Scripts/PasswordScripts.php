@@ -9,12 +9,26 @@
 //Check password match
 function checkPass1Pass2($password1, $password2){
     if($password1 == $password2){
-
+        return true;
     }
     else{
-
+        return false;
     }
 }
 
+//Password encryption
+function passHash($password, $options){
+    return password_hash($password, PASSWORD_BCRYPT, $options);
+}
+
+//Password decryption and validation
+function passDehash($password, $hash){
+    if(password_verify($password, $hash)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 

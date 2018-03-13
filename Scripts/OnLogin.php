@@ -13,3 +13,4 @@ $dom = new DOMDocument();
 $dom->loadHTMLFile("../Interfaces/LoginPage.html");
 $userName = $dom->getElementById("userName");
 $password = $dom->getElementById("password");
+
