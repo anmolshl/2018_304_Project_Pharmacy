@@ -79,4 +79,29 @@ CREATE TABLE Pharmacist
   PRIMARY KEY(employee_id),
   FOREIGN KEY (username) REFERENCES UserTab(username));
 
+CREATE TABLE Prescription
+  (refill INTEGER NOT NULL,
+  expiration DATE NOT NULL,
+  customer_number INTEGER NOT NULL,
+  username CHAR(16) NOT NULL,
+  prescription_number INTEGER NOT NULL,
+  issued_date DATE NOT NULL,
+  PRIMARY KEY(prescription_number),
+  FOREIGN KEY(customer_number, username) REFERENCES Customer(customer_number, username));
+
+CREATE TABLE pharmacist_writes_prescription
+  (employee_id INTEGER NOT NULL,
+  prescription_number INTEGER NOT NULL,
+  PRIMARY KEY(employee_id, prescription_number),
+  FOREIGN KEY(employee_id) REFERENCES Pharmacist(employee_id),
+  FOREIGN KEY(prescription_number) REFERENCES Prescription(prescription_number)
+  ON DELETE CASCADE);
+
+CREATE TABLE drug_cures_illness
+  (illness_name CHAR(20),
+  drug_name CHAR(20),
+  PRIMARY KEY(illness_name, drug_name),
+  FOREIGN KEY(illness_name) REFERENCES Illness(illness_name),
+  FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name));
+
 
