@@ -1,3 +1,5 @@
+LIST
+
 INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,illness_name,quantity) VALUES ('drugName','drugPrescStat','price','manufNo','maxDosage','disease','quantity');
 INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,illness_name,quantity) VALUES ('Tronothane 1% Cream','O','0000.0000','003525','200','Mastocytosis','cutaneous');
 INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,illness_name,quantity) VALUES ('Erythrocin Iv','P','0000.0000','003525','200','Mandibulofacial dysostosis','Treacher Collins type');
