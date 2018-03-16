@@ -6,7 +6,4 @@
  * Time: 10:36 AM
  */
 
-$sqlUser = "ora_o9j0b";
-$sqlPass = "a33834152";
-$sqlHost = "ug";
-
+$oci_Connector = OCILogon("ora_o9j0b", "a33834152", "ug");
