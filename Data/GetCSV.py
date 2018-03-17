@@ -10,6 +10,7 @@ with open("../data/shortDrugs.csv") as csvfile:
     for row in drugs:
         if row[1] == "P" or row[1] == "O":
             drugName = row[0]
+            drugName = drugName.replace(',', '')
             if not(drugName in drugNames):
                 drugNames.append(drugName)
                 drugPrescStat = row[1]
@@ -17,6 +18,7 @@ with open("../data/shortDrugs.csv") as csvfile:
                 manufNo = row[3]
                 maxDosage = row[4]
                 disease = row[5]
+                disease = disease.replace(',', ' ')
                 quantity = "2000"
                 rowNew = drugName + "," + drugPrescStat + "," + price + "," + manufNo + "," + maxDosage + "," + disease + "," + quantity + "\n"
                 newcsv.write(rowNew)
