@@ -6,4 +6,4 @@
  * Time: 10:36 AM
  */
 
-$oci_Connector = OCILogon("ora_o9j0b", "a33834152", "ug");
+$oci_Connector = OCILogon("ora_q5c1b", "a51931153", "ug");
