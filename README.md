@@ -36,3 +36,6 @@ o What is your application technology stack?
 PHP, SQL, Oracle.
 - Other comments as appropriate to explain your project 
 
+
+link: http://www.ugrad.cs.ubc.ca/~o9j0b/2018_304_Project_Pharmacy1/Scripts/SQLConnect.php
+

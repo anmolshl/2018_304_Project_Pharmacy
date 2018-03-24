@@ -18,3 +18,10 @@ $address = $dom->getElementById("address");
 $dob = $dom->getElementById("dob");
 $name = $dom->getElementById("name");
 
+if($password1 == $password2){
+    $queryUserTable = "INSERT INTO UserTab (userename, password) VALUES (".$userName.", ".$password1.");";
+    $queryUserTable = "INSERT INTO Customer (userename, name, address, dob) VALUES (".$userName.", ".$name.", ".$address.", ".dob.");";
+}
+else{
+    echo "Invalid! Please try again";
+}
