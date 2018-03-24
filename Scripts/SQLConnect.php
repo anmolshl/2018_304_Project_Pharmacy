@@ -20,19 +20,19 @@ $oci_Connector = OCILogon("ora_q5c1b", "a51931153", "ug");
 <div align="center" >
     <b style="font-family: 'American Typewriter'; font-size: 15px">Online drug reservation system</b>
 </div>
-<form action="LoginPage.html">
+<form action="../Interfaces/LoginPage.html">
     <div class="container" align="center" style="margin-top: 20px;">
         <button type="submit" style="width: 70px">Login</button>
     </div>
 </form>
-<form action="CustomerSignUp.html">
+<form action="../Interfaces/CustomerSignUp.html">
     <div class="container" align="center">
         <button type="submit" style="width: 70px;">Sign Up</button>
     </div>
 </form>
-<form action="UnregCustDatRetr.php">
+<form action="../Interfaces/UnregDisp.html">
     <div class="container" align="center">
-        <button type="submit" style="width: 70px;">Continue as Guest</button>
+        <button type="submit" style="width: 70px;">Guest</button>
     </div>
 </form>
 </body>
