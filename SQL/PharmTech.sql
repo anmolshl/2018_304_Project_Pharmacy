@@ -28,11 +28,11 @@ CREATE TABLE RegCustomer
   ON DELETE CASCADE);
 
 CREATE TABLE Drugs
-  (drug_name CHAR(20) NOT NULL,
+  (drug_name CHAR(100) NOT NULL,
   quantity INTEGER NOT NULL,
-  manufacturer CHAR(20) NOT NULL,
+  manufacturer CHAR(100) NOT NULL,
   max_dosage INTEGER NOT NULL,
-  illness_name CHAR(20) NOT NULL,
+  illness_name CHAR(100) NOT NULL,
   price INTEGER NOT NULL,
   PRIMARY KEY(drug_name));
 
@@ -106,7 +106,7 @@ CREATE TABLE drug_cures_illness
 
 CREATE TABLE drug_has_warning
   (warning CHAR(30) NOT NULL,
-  drug_name CHAR(20) NOT NULL,
+  drug_name CHAR(100) NOT NULL,
   FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name)
   ON DELETE CASCADE,
   FOREIGN KEY(warning) REFERENCES Warning(warning),
@@ -122,7 +122,7 @@ CREATE TABLE Illness_has_symptom
 
 CREATE TABLE drugs_has_side_effects
   (effect CHAR(30) NOT NULL,
-  drug_name CHAR(20) NOT NULL,
+  drug_name CHAR(100) NOT NULL,
   PRIMARY KEY(effect, drug_name),
   FOREIGN KEY(effect) REFERENCES Side_effects(effect)
   ON DELETE CASCADE,
@@ -131,7 +131,7 @@ CREATE TABLE drugs_has_side_effects
 CREATE TABLE stock_stores_drugs
   (quantity INTEGER NOT NULL,
   stock_ID INTEGER NOT NULL,
-  drug_name CHAR(20) NOT NULL,
+  drug_name CHAR(100) NOT NULL,
   FOREIGN KEY(stock_ID) REFERENCES Stock(stock_ID),
   FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name),
   PRIMARY KEY(stock_ID));
@@ -148,7 +148,7 @@ CREATE TABLE Prescription_orders
   (store_location CHAR(20) NOT NULL,
   username CHAR(16) NOT NULL,
   store_address CHAR(30) NOT NULL,
-  drug_name CHAR(20) NOT NULL,
+  drug_name CHAR(100) NOT NULL,
   refill INTEGER NOT NULL,
   expiration DATE NOT NULL,
   customer_number INTEGER NOT NULL,
