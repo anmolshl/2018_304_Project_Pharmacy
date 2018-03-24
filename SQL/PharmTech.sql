@@ -29,6 +29,7 @@ CREATE TABLE RegCustomer
 
 CREATE TABLE Drugs
   (drug_name CHAR(100) NOT NULL,
+  drugType CHAR(2) NOT NULL;
   quantity INTEGER NOT NULL,
   manufacturer CHAR(100) NOT NULL,
   max_dosage INTEGER NOT NULL,
