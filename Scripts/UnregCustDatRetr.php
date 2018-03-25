@@ -27,7 +27,15 @@ else {
     $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
     $ociQuery = oci_parse($conn, $drugRetr);
     oci_execute($ociQuery);
-    echo "<table border='1'>\n";
+    if($WordSearch != null) {
+        echo "<table border='1'>\n";
+        echo "<tr>\n";
+        echo "<td>Drug Name</td>\n";
+        echo "<td>Drug Type</td>\n";
+        echo "<td>Illness</td>\n";
+        echo "<td>Price</td>\n";
+        echo "</tr>\n";
+    }
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
         echo "<tr>\n";
         foreach ($row as $item) {
