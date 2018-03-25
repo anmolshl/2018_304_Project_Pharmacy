@@ -13,6 +13,7 @@
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
 </div>
+</body>
 <?php
 $conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
 if (!$conn) {
@@ -21,10 +22,9 @@ if (!$conn) {
     exit;
 }
 else {
-    print "Connected to Oracle!";
+    echo "<br>Connected to Oracle!</br>";
     $WordSearch = $_GET['search_key'];
-    print $WordSearch;
-    $drugRetr = "SELECT * FROM Drugs;";
+    $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
     $ociQuery = oci_parse($conn, $drugRetr);
     oci_execute($ociQuery);
     echo "<table border='1'>\n";
@@ -39,7 +39,6 @@ else {
     echo "</table>\n";
 }
 ?>
-</body>
 </html>
 
 
