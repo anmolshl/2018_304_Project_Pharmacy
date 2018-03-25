@@ -38,7 +38,7 @@ else {
         <button type="submit" style="width: 70px;">Sign Up</button>
     </div>
 </form>
-<form action="../Interfaces/UnregDisp.html">
+<form action="UnregCustDatRetr.php">
     <div class="container" align="center">
         <button type="submit" style="width: 70px;">Guest</button>
     </div>
