@@ -49,20 +49,27 @@
 </form>
 </body>
 <?php
-    $s_loc = $_GET('s_loc');
-    $u_name = $_GET('u_name');
-    $s_add = $_GET('s_add');
-    $d_name = $_GET('d_name');
-    $refill = $_GET('refill');
-    $expir = $_GET('expir');
-    $c_num = $_GET('c_num');
-    $issued_d = $_GET('issued_d');
+$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+if (!$conn) {
+    $m = oci_error();
+    echo $m['message'], "\n";
+    exit;
+}
+else {
+   $s_loc = $_GET['s_loc'];
+    $u_name = $_GET['u_name'];
+    $s_add = $_GET['s_add'];
+    $d_name = $_GET['d_name'];
+    $refill = $_GET['refill'];
+    $expir = $_GET['expir'];
+    $c_num = $_GET['c_num'];
+    $issued_d = $_GET['issued_d'];
     $p_num = rand(10000,99999);
-    $dosage = $_GET('dosage');
-
-    $prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill, 
+    $dosage = $_GET['dosage'];
+    $prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill,
                                                           expiration, customer_number, prescription_number, issued_date, dosage) 
                           VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
                                     ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";
+}
 ?>
 </html>
