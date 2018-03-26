@@ -26,7 +26,14 @@ else {
     if($password1 == $password2){
         $usernameCheckQuery = "select username from userTab where username='".$username."'";
         $userCheckOci = oci_parse($conn, $usernameCheckQuery);
-        oci_execute($userCheckOci);
+        $result = oci_execute($userCheckOci);
+        if ($result)
+        {
+            echo '<br>Username retr sucess</br>';
+        } else {
+            $m = oci_error($userCheckOci);
+            echo "<br>ERROR OCCURED".$m."</br>";
+        }
         oci_free_statement($userCheckOci);
         $row = oci_fetch_array($userCheckOci, OCI_ASSOC+OCI_RETURN_NULLS);
         if($row != null){
@@ -37,7 +44,7 @@ else {
         }
         else{
             $registerQueryUserTab = "insert into UserTab(username, password) VALUES ('".$username."', '".$password1."')";
-            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', :dob, '".$username."')";
+            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', ':dob', '".$username."')";
             $nullInd = 0;
             $cust_no = 0;
             while($nullInd != 1) {
@@ -46,7 +53,14 @@ else {
                 $custNoCheckQuery = "select customer_number from RegCustomer where customer_number= :custNo";
                 $checkNoOci = oci_parse($conn, $custNoCheckQuery);
                 oci_bind_by_name($checkNoOci, ":custNo", $cust_no);
-                oci_execute($checkNoOci);
+                $result = oci_execute($checkNoOci);
+                if ($result)
+                {
+                    echo '<br>No retr success</br>';
+                } else {
+                    $m = oci_error($checkNoOci);
+                    echo "<br>ERROR OCCURED".$m."</br>";
+                }
                 oci_free_statement($checkNoOci);
 
                 $row = oci_fetch_array($checkNoOci, OCI_ASSOC+OCI_RETURN_NULLS);
@@ -57,22 +71,45 @@ else {
             $registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (:custNo, '".$username."')";
 
             $UserTabOci = oci_parse($conn, $registerQueryUserTab);
-            oci_execute($UserTabOci, OCI_COMMIT_ON_SUCCESS);
+            $result = oci_execute($UserTabOci);
+            if ($result)
+            {
+                oci_commit($conn); // COMMIT TRANSACTION
+                echo 'INSERT TO DB COMPLETED';
+            } else {
+                oci_rollback($conn); // ROLLBACK INSERTION
+                $m = oci_error($UserTabOci);
+                echo "<br>ERROR OCCURED".$m."</br>";
+            }
             oci_free_statement($UserTabOci);
 
             $CustOci = oci_parse($conn, $registerQueryCust);
             oci_bind_by_name($CustOci, ":dob", strtoupper(date('d-M-y', strtotime($dob))));
-            echo strtoupper(date('d-M-y', strtotime($dob)));
-            oci_execute($CustOci, OCI_COMMIT_ON_SUCCESS);
+            $result = oci_execute($CustOci);
+            if ($result)
+            {
+                oci_commit($conn); // COMMIT TRANSACTION
+                echo 'INSERT TO DB COMPLETED';
+            } else {
+                oci_rollback($conn); // ROLLBACK INSERTION
+                $m = oci_error($CustOci);
+                echo "<br>ERROR OCCURED".$m."</br>";
+            }
             oci_free_statement($CustOci);
 
             $regCustOci = oci_parse($conn, $registerQueryRegCust);
             oci_bind_by_name($regCustOci, ":custNo", $cust_no);
-            oci_execute($regCustOci, OCI_COMMIT_ON_SUCCESS);
+            $result = oci_execute($regCustOci);
+            if ($result)
+            {
+                oci_commit($conn); // COMMIT TRANSACTION
+                echo 'INSERT TO DB COMPLETED';
+            } else {
+                oci_rollback($conn); // ROLLBACK INSERTION
+                $m = oci_error($regCustOci);
+                echo "<br>ERROR OCCURED".$m."</br>";
+            }
             oci_free_statement($regCustOci);
-
-            echo "registered!!!! Fuck yeah!";
-            echo $dob;
 
             oci_close($conn);
         }
