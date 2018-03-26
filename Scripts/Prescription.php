@@ -1,4 +1,5 @@
-
+<?php session_start();
+?>
 /**
  * Created by PhpStorm.
  * User: lilinjian
@@ -12,7 +13,7 @@
     <title>Pharmtech - Sign up</title>
 </head>
 <body>
-<form action="LoginPage.html">
+<form>
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
         <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
     </div>
@@ -43,19 +44,10 @@
     <div class="container" align="center">
         <input id="dosage" type="number" name="dosage" placeholder="Dosage" required>
     </div>
-    <div class="container" align="center" style="margin-top: 20px;">
-        <button type="submit">Submit</button>
-    </div>
 </form>
-<div class="container" align="center">
-    <form action="UnregCustDatRetr.php" method="get">
-        <input id="search_key" type="text" name="search_key" placeholder="Enter drug name" style="width: 200px">
-        <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
-    </form>
-</div>
 </body>
 <?php
-    $s_loc = $_GET['s_loc'];
+    /*$s_loc = $_GET['s_loc'];
     $u_name = $_GET['u_name'];
     $s_add = $_GET['s_add'];
     $d_name = $_GET['d_name'];
@@ -63,12 +55,19 @@
     $expir = $_GET['expir'];
     $c_num = $_GET['c_num'];
     $issued_d = $_GET['issued_d'];
+    $dosage = $_GET['dosage'];*/
     $p_num = rand(10000,99999);
-    $dosage = $_GET['dosage'];
 
-    $prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill, 
-                                                          expiration, customer_number, prescription_number, issued_date, dosage) 
-                          VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
-                                    ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";
+    /*$prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill,
+                                                              expiration, customer_number, prescription_number, issued_date, dosage) 
+                              VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
+                                        ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";*/
+    $_SESSION['p_num'] = $p_num;
 ?>
+<form action="Pharmacist.php" method="GET">
+    <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
+        <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
+    </div>
+    <input type="submit" value="submit">
+</form>
 </html>
