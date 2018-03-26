@@ -37,33 +37,43 @@ else {
         }
         else{
             $registerQueryUserTab = "insert into UserTab(username, password) VALUES ('".$username."', '".$password1."')";
-            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', TO_DATE('".$dob."'), '".$username."')";
+            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', :dob, '".$username."')";
             $nullInd = 0;
             $cust_no = 0;
             while($nullInd != 1) {
                 $cust_no = rand(1, 999999);
-                $custNoCheckQuery = "select customer_number from RegCustomer where customer_number=" . ((string)$cust_no);
-                echo "here";
+
+                $custNoCheckQuery = "select customer_number from RegCustomer where customer_number= :custNo";
                 $checkNoOci = oci_parse($conn, $custNoCheckQuery);
+                oci_bind_by_name($checkNoOci, ":custNo", $cust_no);
                 oci_execute($checkNoOci);
                 oci_free_statement($checkNoOci);
+
                 $row = oci_fetch_array($checkNoOci, OCI_ASSOC+OCI_RETURN_NULLS);
                 if(count($row) > 0){
                     $nullInd = 1;
                 }
             }
-            $registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (".((string)$cust_no).", '".$username."')";
+            $registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (:custNo, '".$username."')";
+
             $UserTabOci = oci_parse($conn, $registerQueryUserTab);
             oci_execute($UserTabOci, OCI_COMMIT_ON_SUCCESS);
             oci_free_statement($UserTabOci);
+
             $CustOci = oci_parse($conn, $registerQueryCust);
+            oci_bind_by_name($CustOci, ":dob", strtoupper(date('d-M-y', strtotime($dob))));
+            echo strtoupper(date('d-M-y', strtotime($dob)));
             oci_execute($CustOci, OCI_COMMIT_ON_SUCCESS);
             oci_free_statement($CustOci);
+
             $regCustOci = oci_parse($conn, $registerQueryRegCust);
+            oci_bind_by_name($regCustOci, ":custNo", $cust_no);
             oci_execute($regCustOci, OCI_COMMIT_ON_SUCCESS);
             oci_free_statement($regCustOci);
+
             echo "registered!!!! Fuck yeah!";
             echo $dob;
+
             oci_close($conn);
         }
     }
