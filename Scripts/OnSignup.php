@@ -29,14 +29,15 @@ else {
         oci_execute($userCheckOci);
         oci_free_statement($userCheckOci);
         $row = oci_fetch_array($userCheckOci, OCI_ASSOC+OCI_RETURN_NULLS);
-        if(!$row){
+        if($row != null){
             echo count($row);
             //header('Location: ../Interfaces/CustomerSignUp.html');
-            echo "Username already taken";
+            echo "Username already taken\n";
+            echo $row[0];
         }
         else{
             $registerQueryUserTab = "insert into UserTab(username, password) VALUES ('".$username."', '".$password1."')";
-            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', '".$dob."', '".$username."')";
+            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', TO_DATE('".$dob."'), '".$username."')";
             $nullInd = 0;
             $cust_no = 0;
             while($nullInd != 1) {
@@ -62,6 +63,7 @@ else {
             oci_execute($regCustOci, OCI_COMMIT_ON_SUCCESS);
             oci_free_statement($regCustOci);
             echo "registered!!!! Fuck yeah!";
+            echo $dob;
             oci_close($conn);
         }
     }
