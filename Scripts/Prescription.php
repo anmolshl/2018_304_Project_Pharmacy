@@ -9,10 +9,10 @@
 <html lang="en" style="background-color: beige">
 <head>
     <meta charset="UTF-8">
-    <title>Pharmtech - Sign up</title>
+    <title>Pharmtech - Prescription</title>
 </head>
 <body>
-<form action="../Scripts/OnSignup.php">
+<form action="../Scripts/Prescription.php" method="get">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
         <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
     </div>
