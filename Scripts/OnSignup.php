@@ -29,7 +29,7 @@ else {
         $row = oci_fetch_array($userCheckOci, OCI_ASSOC+OCI_RETURN_NULLS);
         if($row != null){
             echo count($row);
-            //header('Location: ../Interfaces/CustomerSignUp.html');
+            header('Location: ../Interfaces/CustomerSignUp.html');
             echo "Username already taken\n";
             echo $row[0];
         }
@@ -66,11 +66,13 @@ else {
             insertQuery($conn, $regCustOci);
 
             oci_close($conn);
+
+            header('Location: ../Interfaces/LoginPage.html');
         }
     }
     else{
         echo "\nPasswords entered do not match!\n";
-        //header('Location: ../Interfaces/CustomerSignUp.html');
+        header('Location: ../Interfaces/CustomerSignUp.html');
     }
 }
 ?>
