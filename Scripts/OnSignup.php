@@ -35,11 +35,12 @@ else {
         }
         else{
             $registerQueryUserTab = "insert into UserTab(username, password) VALUES ('".$username."', '".$password1."')";
-            $registerQueryCust = "insert into Customer(name, address, dob, username) values ('".$name."', '".$address."', ':dob', '".$username."')";
             $nullInd = 0;
             $cust_no = 0;
             while($nullInd != 1) {
                 $cust_no = rand(1, 999999);
+
+                echo "<br>".(string)$cust_no."</br>";
 
                 $custNoCheckQuery = "select customer_number from RegCustomer where customer_number= :custNo";
                 $checkNoOci = oci_parse($conn, $custNoCheckQuery);
@@ -51,13 +52,13 @@ else {
                     $nullInd = 1;
                 }
             }
+            $registerQueryCust = "insert into Customer(name, address, dob, username, customer_number) values ('".$name."', '".$address."', to_date('".$dob."', 'dd-mm-yyyy'), '".$username."', ".(string)$cust_no.")";
             $registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (:custNo, '".$username."')";
 
             $UserTabOci = oci_parse($conn, $registerQueryUserTab);
             insertQuery($conn, $UserTabOci);
 
             $CustOci = oci_parse($conn, $registerQueryCust);
-            oci_bind_by_name($CustOci, ":dob", strtoupper(date('d-M-y', strtotime($dob))));
             insertQuery($conn, $CustOci);
 
             $regCustOci = oci_parse($conn, $registerQueryRegCust);
