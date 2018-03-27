@@ -15,7 +15,10 @@ function insertQuery($conn, $sql){
     } else {
         oci_rollback($conn); // ROLLBACK INSERTION
         $m = oci_error($sql);
-        echo "<br>ERROR OCCURED".$m."</br>";
+        echo "<br>ERROR OCCURED"."</br>";
+        foreach ($m as $ix){
+            echo "<br>".$ix."</br>";
+        }
     }
     oci_free_statement($sql);
 }
@@ -27,7 +30,10 @@ function selectQuery($conn, $sql){
         echo '<br>No retr success</br>';
     } else {
         $m = oci_error($sql);
-        echo "<br>ERROR OCCURED".$m."</br>";
+        echo "<br>ERROR OCCURED"."</br>";
+        foreach ($m as $ix){
+            echo "<br>".$ix."</br>";
+        }
     }
     oci_free_statement($sql);
 }
