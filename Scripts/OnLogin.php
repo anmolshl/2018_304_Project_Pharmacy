@@ -6,26 +6,35 @@
  * Time: 9:06 PM
  */
 require "PasswordScripts.php";
-require "SQLConnect.php";
+require "SQLQuery.php";
 //Get data from HTML form
-$dom = new DOMDocument();
-$dom->loadHTMLFile("../Interfaces/LoginPage.html");
-$userName = $dom->getElementById("userName");
-$password = $dom->getElementById("password");
+$userName = $_GET['userName'];
+$password = $_GET['password'];
 $conn = oraConnect();
 if (!$conn) {
     exit;
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $userName2 = "select username from UserTab where drug_name='".$userName."'";
-    $password2 = "select password from UserTab where password='".$password."'";
-    $ociuserName2 = oci_parse($conn, $userName2);
-    $ocipassword2 = oci_parse($conn, $password2);
-    if ($password == $ocipassword2 && $userName == $ociuserName2) {
-        header("RegCustDatRetr.php");
+    $passwordQuery = "select password from UserTab where username='".$userName."'";
+    $ociPasswordQuery = oci_parse($conn, $passwordQuery);
+    selectQuery($conn, $ociPasswordQuery);
+    $i = 0;
+    while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)){
+        ++$i;
+        $checkPass = 0;
+        foreach ($row as $item) {
+            if (checkPass1Pass2($item, $password)){
+                $checkPass = 1;
+                header("Location: RegCustDatRetr.php");
+                break;
+            }
+        }
+        if($checkPass == 0){
+            header('Location: ../Interfaces/LoginPageWrongPass.html');
+        }
     }
-    else {
-        echo "Please try again, wrong username or password\n";
+    if($i == 0){
+        header('Location: ../Interfaces/LoginPageNoUser.html');
     }
 }
