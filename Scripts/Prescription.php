@@ -1,11 +1,11 @@
 <?php session_start();
 ?>
 /**
- * Created by PhpStorm.
- * User: lilinjian
- * Date: 25/03/2018
- * Time: 15:18
- */
+* Created by PhpStorm.
+* User: lilinjian
+* Date: 25/03/2018
+* Time: 15:18
+*/
 <!DOCTYPE html>
 <html lang="en" style="background-color: beige">
 <head>
@@ -47,22 +47,21 @@
 </form>
 </body>
 <?php
-    /*$s_loc = $_GET['s_loc'];
-    $u_name = $_GET['u_name'];
-    $s_add = $_GET['s_add'];
-    $d_name = $_GET['d_name'];
-    $refill = $_GET['refill'];
-    $expir = $_GET['expir'];
-    $c_num = $_GET['c_num'];
-    $issued_d = $_GET['issued_d'];
-    $dosage = $_GET['dosage'];*/
-    $p_num = rand(10000,99999);
-
-    /*$prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill,
-                                                              expiration, customer_number, prescription_number, issued_date, dosage) 
-                              VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
-                                        ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";*/
-    $_SESSION['p_num'] = $p_num;
+/*$s_loc = $_GET['s_loc'];
+$u_name = $_GET['u_name'];
+$s_add = $_GET['s_add'];
+$d_name = $_GET['d_name'];
+$refill = $_GET['refill'];
+$expir = $_GET['expir'];
+$c_num = $_GET['c_num'];
+$issued_d = $_GET['issued_d'];
+$dosage = $_GET['dosage'];*/
+$p_num = rand(10000,99999);
+/*$prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill,
+                                                          expiration, customer_number, prescription_number, issued_date, dosage)
+                          VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
+                                    ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";*/
+$_SESSION['p_num'] = $p_num;
 ?>
 <form action="Pharmacist.php" method="GET">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
