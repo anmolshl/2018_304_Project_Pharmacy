@@ -12,7 +12,11 @@
 <body>
 <form action="Pharmacist.php" method="post">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
-        <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
+        <b style="font-family: 'American Typewriter'; font-size: 30px">
+            <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+                PharmTech
+            </a>
+        </b>
     </div>
     <div class="container" align="center">
         <input name="refill" type="boolean" name="refill" placeholder="Refill?" required>

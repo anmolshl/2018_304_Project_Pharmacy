@@ -5,7 +5,11 @@ html lang="en" style="background-color: beige">
 </head>
 <body>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
-    <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
+    <b style="font-family: 'American Typewriter'; font-size: 30px">
+        <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+            PharmTech
+        </a>
+    </b>
 </div>
 <div class="container" align="center">
     <form action="RegCustDatRetr.php" method="get">
