@@ -49,8 +49,8 @@ else {
     //print the information of this prescription
     if (isset($_POST['p_num'])) {
         $p_num = $_POST['p_num'];
-        $p_info = "select * from Prescriotion where prescription_number = '".$p_num."' ";
-        getInfo($p_info, $conn);
+        $query = "select * from Prescriotion where prescription_number = '".$p_num."' ";
+        getInfo($query, $conn);
     }
     //print the information of this drug
     if (isset($_POST['d_name'])) {
@@ -58,24 +58,24 @@ else {
         echo 'get Drug info';
         echo '<br>';
         $d_name = $_POST['d_name'];
-        $d_info = "select * from Drugs where drug_name = '".$d_name."'";
-        getInfo($d_info, $conn);
+        $query = "select * from Drugs where drug_name = '".$d_name."'";
+        getInfo($query, $conn);
     }
     //print this information of this stock
     if (isset($_POST['s_id'])) {
         $s_id = $_POST['s_id'];
-        $s_info = "select * from Stock where stock_ID = $s_id";
-        getInfo($s_info, $conn);
+        $query = "select * from Stock where stock_ID = $s_id";
+        getInfo($query, $conn);
     }
     //print the information of this customer
     if (isset($_POST['c_num'])) {
         $c_num = $_POST['c_num'];
-        $c_info = "select * from Customer where customer_number = $c_num";
-        getInfo($c_info, $conn);
+        $query = "select * from Customer where customer_number = $c_num";
+        getInfo($query, $conn);
     }
 }
-function getInfo($info, $conn){
-    $ociQuery = oci_parse($conn, $info);
+function getInfo($query, $conn){
+    $ociQuery = oci_parse($conn, $query);
     selectQuery($conn, $ociQuery);
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
         echo "<tr>\n";
