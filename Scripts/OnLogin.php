@@ -16,10 +16,17 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    //TODO: check if user is employee
+    $employeeCheckQuery = "select username from Pharmtech where username = '".$userName."'";
+    $employeeCheck = 0;
+    $employeeCheckQueryOCI = oci_parse($conn, $employeeCheckQuery);
+    selectQuery($conn, $employeeCheckQueryOCI);
     $passwordQuery = "select password from UserTab where username='".$userName."'";
     $ociPasswordQuery = oci_parse($conn, $passwordQuery);
     selectQuery($conn, $ociPasswordQuery);
+    while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        $employeeCheck = 1;
+    }
+    oci_free_statement($employeeCheckQueryOCI);
     $i = 0;
     while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)){
         ++$i;
@@ -27,9 +34,14 @@ else {
         foreach ($row as $item) {
             if (checkPass1Pass2($item, $password)){
                 $checkPass = 1;
-                header("Location: RegCustDatRetr.php");
                 session_start();
                 $_SESSION['userName'] = $userName;
+                if($employeeCheck == 1){
+                    header("Location: EmpDatRetr.php");
+                }
+                else{
+                    header("Location: RegCustDatRetr.php");
+                }
                 break;
             }
         }
