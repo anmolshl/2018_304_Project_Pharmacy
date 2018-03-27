@@ -7,6 +7,7 @@
  */
 
 require "PasswordScripts.php";
+require "SQLConnect.php";
 
 //Get data from HTML form
 $dom = new DOMDocument();
@@ -15,10 +16,8 @@ $userName = $dom->getElementById("userName");
 $password = $dom->getElementById("password");
 
 
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+$conn = oraConnect();
 if (!$conn) {
-    $m = oci_error();
-    echo $m['message'], "\n";
     exit;
 }
 else {

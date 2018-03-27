@@ -35,5 +35,17 @@ function selectQuery($conn, $sql){
             echo "<br>".$ix."</br>";
         }
     }
-    oci_free_statement($sql);
+}
+
+function oraConnect(){
+    $conn = $conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+    if (!$conn) {
+        $m = oci_error();
+        echo $m['message'], "\n";
+        exit;
+    }
+    else{
+        print "Connected to Oracle!";
+    }
+    return $conn;
 }
