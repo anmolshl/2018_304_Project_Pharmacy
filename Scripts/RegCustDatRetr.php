@@ -26,5 +26,11 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $username = $_GET[$username];
+    session_start();
+    if(!isset($_SESSION['userName'])){
+        header('Location: ../Interfaces/LoginPage.html');
+    }
+    else{
+        //TODO: create UI for registered user
+    }
 }

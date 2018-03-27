@@ -16,6 +16,7 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
+    //TODO: check if user is employee
     $passwordQuery = "select password from UserTab where username='".$userName."'";
     $ociPasswordQuery = oci_parse($conn, $passwordQuery);
     selectQuery($conn, $ociPasswordQuery);
