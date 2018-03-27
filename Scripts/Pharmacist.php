@@ -44,7 +44,7 @@ else {*/
     //print the information of this prescription
     if (isset($_GET['p_num'])){
         $p_num = $_GET['p_num'];
-        $p_info = "select * from Prescriotion where prescription_number = $p_num ";
+        $p_info = "select * from Prescriotion where prescription_number = $p_num " ;
         getInfo($p_info, $conn);
     }
     //print the information of this drug
