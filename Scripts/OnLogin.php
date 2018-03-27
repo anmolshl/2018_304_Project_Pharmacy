@@ -26,4 +26,8 @@ else {
     $password2 = "select password from UserTab where password='".$password."'";
     $ociuserName2 = oci_parse($conn, $userName2);
     oci_execute($ociuserName2);
-    oci_fetch($ociuserName2, )
+    while (oci_fetch($ociuserName2)) {
+        echo oci_result($ociuserName2, 'USERNAME');
+        }
+    }
+
