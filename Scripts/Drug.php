@@ -6,33 +6,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Pharmtech - Prescription</title>
+    <title>Pharmtech - Add Drug</title>
 </head>
 
 <body>
-    <form action="Pharmacist.php" method="post">
-        <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
-            <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
-        </div>
-        <div class="container" align="center">
-            <input name="refill" type="boolean" name="refill" placeholder="Refill?" required>
-        </div>
-        <div class="container" align="center">
-            <input name="expir" type="date" name="expir" placeholder="Expiration" required>
-        </div>
-        <div class="container" align="center">
-            <input name="c_num" type="number" name="c_num" placeholder="Customer Number" required>
-        </div>
-        <div class="container" align="center">
-            <input name="u_name" type="number" name="u_name" placeholder="Customer Name" required>
-        </div>
-        <div class="container" align="center">
-            <input name="issued_d" type="date" name="issued_d" placeholder="Issued Date" required>
-        </div>
-        <div class="container" align="center" style="margin-top: 20px;">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+<form action="Pharmacist.php" method="post">
+    <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
+        <b style="font-family: 'American Typewriter'; font-size: 30px">PharmTech</b>
+    </div>
+    <div class="container" align="center">
+        <input name="refill" type="boolean" name="refill" placeholder="Refill?" required>
+    </div>
+    <div class="container" align="center">
+        <input name="expir" type="date" name="expir" placeholder="Expiration" required>
+    </div>
+    <div class="container" align="center">
+        <input name="c_num" type="number" name="c_num" placeholder="Customer Number" required>
+    </div>
+    <div class="container" align="center">
+        <input name="u_name" type="number" name="u_name" placeholder="Customer Name" required>
+    </div>
+    <div class="container" align="center">
+        <input name="issued_d" type="date" name="issued_d" placeholder="Issued Date" required>
+    </div>
+    <div class="container" align="center" style="margin-top: 20px;">
+        <button type="submit">Submit</button>
+    </div>
+</form>
 
 </body>
 
