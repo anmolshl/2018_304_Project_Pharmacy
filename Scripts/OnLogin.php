@@ -23,14 +23,8 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $userName2 = "select username from UserTab where drug_name='".$userName."'";
+    $userName2 = "select username from UserTab where username='".$userName."'";
     $password2 = "select password from UserTab where password='".$password."'";
     $ociuserName2 = oci_parse($conn, $userName2);
-    $ocipassword2 = oci_parse($conn, $password2);
-    if ($password == $ocipassword2 && $userName == $ociuserName2) {
-        header("RegCustDatRetr.php");
-    }
-    else {
-        echo "Please try again, wrong username or password\n";
-    }
-    }
+    oci_execute($ociuserName2);
+    oci_fetch($ociuserName2, )
