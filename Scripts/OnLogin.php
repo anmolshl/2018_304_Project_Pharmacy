@@ -27,6 +27,8 @@ else {
             if (checkPass1Pass2($item, $password)){
                 $checkPass = 1;
                 header("Location: RegCustDatRetr.php");
+                session_start();
+                $_SESSION['userName'] = $userName;
                 break;
             }
         }
