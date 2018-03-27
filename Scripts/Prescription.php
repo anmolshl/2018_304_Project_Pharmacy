@@ -37,13 +37,13 @@
 </body>
 
 <?php
-/*$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
 if (!$conn) {
     $m = oci_error();
     echo $m['message'], "\n";
     exit;
 }
-else {*/
+else {
     $u_name = $_GET['u_name'];
     $refill = $_GET['refill'];
     $expir = $_GET['expir'];
@@ -53,9 +53,9 @@ else {*/
     $_SESSION['p_num'] = $p_num;
 
     $prescriptionWrite = "insert into Prescription(refill,expiration, customer_number, username, prescription_number, issued_date)
-                              VALUES ('".$refill."' ,'".$expir."','".$c_num."','".$_uname.",'".$p_num."', '".$issued_d."')";
+                              VALUES ('" . $refill . "' ,'" . $expir . "','" . $c_num . "','" . $_uname . ",'" . $p_num . "', '" . $issued_d . "')";
 
-
+}
 /*$s_loc = $_GET['s_loc'];
 $u_name = $_GET['u_name'];
 $s_add = $_GET['s_add'];

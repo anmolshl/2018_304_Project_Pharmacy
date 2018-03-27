@@ -34,39 +34,39 @@
         </div>
     </form>
 <?php
-/*$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
 if (!$conn) {
     $m = oci_error();
     echo $m['message'], "\n";
     exit;
 }
-else {*/
+else {
+
     //print the information of this prescription
-    if (isset($_GET['p_num'])){
+    if (isset($_GET['p_num'])) {
         $p_num = $_GET['p_num'];
-        $p_info = "select * from Prescriotion where prescription_number = $p_num " ;
+        $p_info = "select * from Prescriotion where prescription_number = $p_num ";
         getInfo($p_info, $conn);
     }
     //print the information of this drug
-    if (isset($_GET['d_name'])){
+    if (isset($_GET['d_name'])) {
         $d_name = $_GET['d_name'];
         $d_info = "select * from Drugs where drug_name = $d_name";
         getInfo($d_info, $conn);
     }
     //print this information of this stock
-    if (isset($_GET['s_id'])){
+    if (isset($_GET['s_id'])) {
         $s_id = $_GET['s_id'];
         $s_info = "select * from Stock where stock_ID = $s_id";
         getInfo($s_info, $conn);
     }
     //print the information of this customer
-    if (isset($_GET['c_num'])){
+    if (isset($_GET['c_num'])) {
         $c_num = $_GET['c_num'];
         $c_info = "select * from Customer where customer_number = $c_num";
         getInfo($c_info, $conn);
     }
-
-
+}
 function getInfo($info, $conn){
     $ociQuery = oci_parse($conn, $info);
     oci_execute($ociQuery);
