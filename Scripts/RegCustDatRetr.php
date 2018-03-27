@@ -16,14 +16,11 @@ html lang="en" style="background-color: beige">
 </body>
 
 <?php
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+$conn = oraConnect();
 if (!$conn) {
-    $m = oci_error();
-    echo $m['message'], "\n";
     exit;
 }
 else {
     echo "<br>Connected to Oracle!</br>";
     $username = $_GET[$username];
-
 }
