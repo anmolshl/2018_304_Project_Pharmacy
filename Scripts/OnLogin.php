@@ -20,13 +20,13 @@ else {
     $employeeCheck = 0;
     $employeeCheckQueryOCI = oci_parse($conn, $employeeCheckQuery);
     selectQuery($conn, $employeeCheckQueryOCI);
-    $passwordQuery = "select password from UserTab where username='".$userName."'";
-    $ociPasswordQuery = oci_parse($conn, $passwordQuery);
-    selectQuery($conn, $ociPasswordQuery);
-    while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
+    while($row = oci_fetch_array($employeeCheckQueryOCI, OCI_ASSOC+OCI_RETURN_NULLS)) {
         $employeeCheck = 1;
     }
     oci_free_statement($employeeCheckQueryOCI);
+    $passwordQuery = "select password from UserTab where username='".$userName."'";
+    $ociPasswordQuery = oci_parse($conn, $passwordQuery);
+    selectQuery($conn, $ociPasswordQuery);
     $i = 0;
     while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)){
         ++$i;
