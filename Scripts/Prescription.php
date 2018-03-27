@@ -1,11 +1,5 @@
 <?php session_start();
 ?>
-/**
-* Created by PhpStorm.
-* User: lilinjian
-* Date: 25/03/2018
-* Time: 15:18
-*/
 
 <!DOCTYPE html>
 <html lang="en" style="background-color: beige">
@@ -43,24 +37,24 @@
 </body>
 
 <?php
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+/*$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
 if (!$conn) {
     $m = oci_error();
     echo $m['message'], "\n";
     exit;
 }
-else {
-
+else {*/
     $u_name = $_GET['u_name'];
     $refill = $_GET['refill'];
     $expir = $_GET['expir'];
     $c_num = $_GET['c_num'];
     $issued_d = $_GET['issued_d'];
     $p_num = rand(10000, 99999);
+    $_SESSION['p_num'] = $p_num;
 
     $prescriptionWrite = "insert into Prescription(refill,expiration, customer_number, username, prescription_number, issued_date)
                               VALUES ('".$refill."' ,'".$expir."','".$c_num."','".$_uname.",'".$p_num."', '".$issued_d."')";
-}
+
 
 /*$s_loc = $_GET['s_loc'];
 $u_name = $_GET['u_name'];
@@ -71,12 +65,10 @@ $expir = $_GET['expir'];
 $c_num = $_GET['c_num'];
 $issued_d = $_GET['issued_d'];
 $dosage = $_GET['dosage'];*/
-$p_num = rand(10000,99999);
 /*$prescriptionWrite = "insert into Prescription_orders(store_location, username, store_address, drug_name, refill,
                                                           expiration, customer_number, prescription_number, issued_date, dosage)
                           VALUES ('".$s_loc."','".$_uname."','".$s_add."','".$d_name."','".$d_name."','".$refill."'
                                     ,'".$expir."','".$c_num."','".$p_num."', '".$issued_d."', '".$dosage."')";*/
-$_SESSION['p_num'] = $p_num;
 
 ?>
 

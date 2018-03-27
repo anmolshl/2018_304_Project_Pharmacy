@@ -26,46 +26,50 @@
         </div>
         <div class="container" align="center" style="margin-top: 20px;">
             <input type="number" placeholder="Stock ID">
-            <button id="s_id" type="submit">Check Stock</button>
+            <button id="s_id" type="submit">Check Stock Information</button>
         </div>
         <div class="container" align="center" style="margin-top: 20px;">
             <input type="number" placeholder="Customer ID">
-            <button id="c_num" type="submit">Check Patient History</button>
+            <button id="c_num" type="submit">Check Patient Information</button>
         </div>
     </form>
 <?php
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+/*$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
 if (!$conn) {
     $m = oci_error();
     echo $m['message'], "\n";
     exit;
 }
-else {
-    $p_num = $_GET('p_num');
-    //TODO: Get the information of such prescription
-    if($p_num != null) getPrescriptionInfo($p_num, $conn);
-    $d_name = $_GET('d_name');
-    if ($s_id != null)
-    //TODO: Get the information of such drug
-    $s_id = $_GET('s_id');
-    //TODO: Get the information of such stock
-    $c_num = $_GET('c_num');
-    //TODO: Get the information of such customer
-}
-
-function getPrescriptionInfo($p_num, $conn){
-    $p_info = "select * from Prescriotion where 'prescription number' = $p_num ";
-    $ociQuery = oci_parse($conn, $p_info);
-    oci_execute($ociQuery);
-    if($p_info != null) {
-        echo "<table border='1'>\n";
-        echo "<tr>\n";
-        echo "<td>Drug Name</td>\n";
-        echo "<td>Drug Type</td>\n";
-        echo "<td>Illness</td>\n";
-        echo "<td>Price</td>\n";
-        echo "</tr>\n";
+else {*/
+    //print the information of this prescription
+    if (isset($_GET['p_num'])){
+        $p_num = $_GET['p_num'];
+        $p_info = "select * from Prescriotion where prescription_number = $p_num ";
+        getInfo($p_info, $conn);
     }
+    //print the information of this drug
+    if (isset($_GET['d_name'])){
+        $d_name = $_GET['d_name'];
+        $d_info = "select * from Drugs where drug_name = $d_name";
+        getInfo($d_info, $conn);
+    }
+    //print this information of this stock
+    if (isset($_GET['s_id'])){
+        $s_id = $_GET['s_id'];
+        $s_info = "select * from Stock where stock_ID = $s_id";
+        getInfo($s_info, $conn);
+    }
+    //print the information of this customer
+    if (isset($_GET['c_num'])){
+        $c_num = $_GET['c_num'];
+        $c_info = "select * from Customer where customer_number = $c_num";
+        getInfo($c_info, $conn);
+    }
+
+
+function getInfo($info, $conn){
+    $ociQuery = oci_parse($conn, $info);
+    oci_execute($ociQuery);
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
         echo "<tr>\n";
         foreach ($row as $item) {
