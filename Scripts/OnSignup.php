@@ -7,6 +7,7 @@
  */
 
 require "PasswordScripts.php";
+require "SQLQuery.php";
 
 $password1 = $_GET['password1'];
 $password2 = $_GET['password2'];
@@ -26,15 +27,7 @@ else {
     if($password1 == $password2){
         $usernameCheckQuery = "select username from userTab where username='".$username."'";
         $userCheckOci = oci_parse($conn, $usernameCheckQuery);
-        $result = oci_execute($userCheckOci);
-        if ($result)
-        {
-            echo '<br>Username retr sucess</br>';
-        } else {
-            $m = oci_error($userCheckOci);
-            echo "<br>ERROR OCCURED".$m."</br>";
-        }
-        oci_free_statement($userCheckOci);
+        selectQuery($conn, $userCheckOci);
         $row = oci_fetch_array($userCheckOci, OCI_ASSOC+OCI_RETURN_NULLS);
         if($row != null){
             echo count($row);
@@ -53,15 +46,7 @@ else {
                 $custNoCheckQuery = "select customer_number from RegCustomer where customer_number= :custNo";
                 $checkNoOci = oci_parse($conn, $custNoCheckQuery);
                 oci_bind_by_name($checkNoOci, ":custNo", $cust_no);
-                $result = oci_execute($checkNoOci);
-                if ($result)
-                {
-                    echo '<br>No retr success</br>';
-                } else {
-                    $m = oci_error($checkNoOci);
-                    echo "<br>ERROR OCCURED".$m."</br>";
-                }
-                oci_free_statement($checkNoOci);
+                selectQuery($conn, $checkNoOci);
 
                 $row = oci_fetch_array($checkNoOci, OCI_ASSOC+OCI_RETURN_NULLS);
                 if(count($row) > 0){
@@ -71,45 +56,15 @@ else {
             $registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (:custNo, '".$username."')";
 
             $UserTabOci = oci_parse($conn, $registerQueryUserTab);
-            $result = oci_execute($UserTabOci);
-            if ($result)
-            {
-                oci_commit($conn); // COMMIT TRANSACTION
-                echo 'INSERT TO DB COMPLETED';
-            } else {
-                oci_rollback($conn); // ROLLBACK INSERTION
-                $m = oci_error($UserTabOci);
-                echo "<br>ERROR OCCURED".$m."</br>";
-            }
-            oci_free_statement($UserTabOci);
+            insertQuery($conn, $UserTabOci);
 
             $CustOci = oci_parse($conn, $registerQueryCust);
             oci_bind_by_name($CustOci, ":dob", strtoupper(date('d-M-y', strtotime($dob))));
-            $result = oci_execute($CustOci);
-            if ($result)
-            {
-                oci_commit($conn); // COMMIT TRANSACTION
-                echo 'INSERT TO DB COMPLETED';
-            } else {
-                oci_rollback($conn); // ROLLBACK INSERTION
-                $m = oci_error($CustOci);
-                echo "<br>ERROR OCCURED".$m."</br>";
-            }
-            oci_free_statement($CustOci);
+            insertQuery($conn, $CustOci);
 
             $regCustOci = oci_parse($conn, $registerQueryRegCust);
             oci_bind_by_name($regCustOci, ":custNo", $cust_no);
-            $result = oci_execute($regCustOci);
-            if ($result)
-            {
-                oci_commit($conn); // COMMIT TRANSACTION
-                echo 'INSERT TO DB COMPLETED';
-            } else {
-                oci_rollback($conn); // ROLLBACK INSERTION
-                $m = oci_error($regCustOci);
-                echo "<br>ERROR OCCURED".$m."</br>";
-            }
-            oci_free_statement($regCustOci);
+            insertQuery($conn, $regCustOci);
 
             oci_close($conn);
         }
