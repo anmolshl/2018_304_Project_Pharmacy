@@ -15,10 +15,10 @@
 </div>
 </body>
 <?php
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+require "SQLQuery.php";
+
+$conn = oraConnect();
 if (!$conn) {
-    $m = oci_error();
-    echo $m['message'], "\n";
     exit;
 }
 else {
@@ -26,7 +26,7 @@ else {
     $WordSearch = $_GET['search_key'];
     $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
     $ociQuery = oci_parse($conn, $drugRetr);
-    oci_execute($ociQuery);
+    selectQuery($conn, $ociQuery);
     if($WordSearch != null) {
         echo "<table border='1'>\n";
         echo "<tr>\n";
@@ -44,10 +44,10 @@ else {
         echo "</tr>\n";
     }
     echo "</table>\n";
+    oci_close($conn);
 }
 ?>
 </html>
-
 
 
 

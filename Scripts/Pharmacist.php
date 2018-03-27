@@ -34,10 +34,9 @@
         </div>
     </form>
 <?php
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+require "SQLQuery.php";
+$conn = oraConnect();
 if (!$conn) {
-    $m = oci_error();
-    echo $m['message'], "\n";
     exit;
 }
 else {
@@ -69,7 +68,7 @@ else {
 }
 function getInfo($info, $conn){
     $ociQuery = oci_parse($conn, $info);
-    oci_execute($ociQuery);
+    selectQuery($conn, $ociQuery);
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
         echo "<tr>\n";
         foreach ($row as $item) {
@@ -78,7 +77,6 @@ function getInfo($info, $conn){
         echo "</tr>\n";
     }
     echo "</table>\n";
-
 }
 
 

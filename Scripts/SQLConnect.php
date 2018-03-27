@@ -6,10 +6,9 @@
  * Date: 2018-03-13
  * Time: 10:36 AM
  */
-$conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+require "SQLQuery.php";
+$conn = oraConnect();
 if (!$conn) {
-    $m = oci_error();
-    echo $m['message'], "\n";
     exit;
 }
 else {
@@ -45,4 +44,3 @@ else {
 </form>
 </body>
 </html>
-
