@@ -32,21 +32,30 @@ else {
     $ociQuery = oci_parse($conn, $drugRetr);
     selectQuery($conn, $ociQuery);
     if($WordSearch != null) {
-        echo "<table border='1'>\n";
+        echo "<table border='1' align='center'>\n";
         echo "<tr>\n";
         echo "<td>Drug Name</td>\n";
         echo "<td>Drug Type</td>\n";
         echo "<td>Illness</td>\n";
         echo "<td>Price</td>\n";
-        echo "<td>Quantity</td>";
         echo "</tr>\n";
     }
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
         echo "<tr>\n";
-        foreach ($row as $item) {
+        $item0 = null;
+        $validRow = 0;
+        $rowArr = array();
+        foreach($row as $item) {
+            $validRow = 1;
+            $item0 = $item;
             echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+            array_push($rowArr, $item);
         }
-        echo "<td><input type='number'></td>";
+        if($validRow == 1) {
+            echo "<td>";
+            echo "<a href='OnSelectDrug.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "'>ADD</a>";
+            echo "</td>";
+        }
         echo "</tr>\n";
     }
     echo "</table>\n";
