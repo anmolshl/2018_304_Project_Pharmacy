@@ -38,7 +38,7 @@ CREATE TABLE Drugs
   PRIMARY KEY(drug_name));
 
 CREATE TABLE Illness
-  (illness_name CHAR(20) NOT NULL,
+  (illness_name CHAR(100) NOT NULL,
   pathogen CHAR(20) NOT NULL,
   duration INTEGER NOT NULL,
   PRIMARY KEY(illness_name));
@@ -99,8 +99,8 @@ CREATE TABLE pharmacist_writes_prescription
   ON DELETE CASCADE);
 
 CREATE TABLE drug_cures_illness
-  (illness_name CHAR(20),
-  drug_name CHAR(20),
+  (illness_name CHAR(100),
+  drug_name CHAR(100),
   PRIMARY KEY(illness_name, drug_name),
   FOREIGN KEY(illness_name) REFERENCES Illness(illness_name),
   FOREIGN KEY(drug_name) REFERENCES Drugs(drug_name));
@@ -115,7 +115,7 @@ CREATE TABLE drug_has_warning
 
 CREATE TABLE Illness_has_symptom
   (symptom CHAR(30) NOT NULL,
-  illness_name CHAR(20) NOT NULL,
+  illness_name CHAR(100) NOT NULL,
   PRIMARY KEY(symptom, illness_name),
   FOREIGN KEY(symptom) REFERENCES Symptom(symptom)
   ON DELETE CASCADE,
