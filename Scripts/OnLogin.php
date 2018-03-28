@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <?php
 /**
  * Created by PhpStorm.
@@ -27,7 +29,7 @@ else {
     $custNo = "";
     $custNoQuery = "select customer_number from RegCustomer where username='".$userName."'";
     $custNoQueryOci = oci_parse($conn, $custNoQuery);
-    selectQuery($conn, $custNoQuery);
+    selectQuery($conn, $custNoQueryOci);
     while($row = oci_fetch_array($custNoQueryOci, OCI_ASSOC+OCI_RETURN_NULLS)){
         foreach ($row as $item){
             $custNo = $item;
@@ -44,14 +46,11 @@ else {
         foreach ($row as $item) {
             if (checkPass1Pass2($item, $password)){
                 $checkPass = 1;
-                session_start();
-                $_SESSION['userName'] = $userName;
-                $_SESSION['custNo'] = $custNo;
                 if($employeeCheck == 1){
-                    header("Location: EmpDatRetr.php");
+                    header("Location: EmpDatRetr.php?userName='".$userName."'&custNo='".$custNo."'");
                 }
                 else{
-                    header("Location: RegDisp.php");
+                    header("Location: RegDisp.php?userName='".$userName."'&custNo='".$custNo."'");
                 }
                 break;
             }

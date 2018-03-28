@@ -7,6 +7,7 @@
  * Time: 10:36 AM
  */
 require "SQLQuery.php";
+
 $conn = oraConnect();
 if (!$conn) {
     exit;
@@ -41,7 +42,7 @@ else {
         <button type="submit" style="width: 70px;">Sign Up</button>
     </div>
 </form>
-<form action="UnregCustDatRetr.php">
+<form action="SearchPage.php">
     <div class="container" align="center">
         <button type="submit" style="width: 70px;">Guest</button>
     </div>

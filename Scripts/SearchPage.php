@@ -12,7 +12,7 @@
     </b>
 </div>
 <div class="container" align="center">
-    <form action="UnregCustDatRetr.php" method="get">
+    <form action="SearchPage.php" method="get">
         <input id="search_key" type="text" name="search_key" placeholder="Enter drug name" style="width: 200px">
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
