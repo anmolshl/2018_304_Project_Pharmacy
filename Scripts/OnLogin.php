@@ -40,7 +40,7 @@ else {
                     header("Location: EmpDatRetr.php");
                 }
                 else{
-                    header("Location: RegCustDatRetr.php");
+                    header("Location: RegDisp.php");
                 }
                 break;
             }

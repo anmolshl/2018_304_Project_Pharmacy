@@ -1,4 +1,4 @@
-html lang="en" style="background-color: beige">
+<html lang="en" style="background-color: beige">
 <head>
     <meta charset="UTF-8">
     <title>Welcome User!</title>
@@ -16,21 +16,47 @@ html lang="en" style="background-color: beige">
         <input id="search_key" type="text" name="search_key" placeholder="Enter drug name" style="width: 200px">
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
+    <form action="RegDisp.php">
+        <div class="container" align="middle">
+            <button type="submit" style="width: 70px;">Go Back</button>
+        </div>
+        <div class="container" align="bottom">
+            <button type="submit" style="width: 70px;">Logout</button>
+        </div>
+    </form>
 </div>
 </body>
-
 <?php
+require "SQLQuery.php";
+
 $conn = oraConnect();
 if (!$conn) {
     exit;
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    session_start();
-    if(!isset($_SESSION['userName'])){
-        header('Location: ../Interfaces/LoginPage.html');
+    $WordSearch = $_GET['search_key'];
+    $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
+    $ociQuery = oci_parse($conn, $drugRetr);
+    selectQuery($conn, $ociQuery);
+    if($WordSearch != null) {
+        echo "<table border='1'>\n";
+        echo "<tr>\n";
+        echo "<td>Drug Name</td>\n";
+        echo "<td>Drug Type</td>\n";
+        echo "<td>Illness</td>\n";
+        echo "<td>Price</td>\n";
+        echo "</tr>\n";
     }
-    else{
-        //TODO: create UI for registered user
+    while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        echo "<tr>\n";
+        foreach ($row as $item) {
+            echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        }
+        echo "</tr>\n";
     }
+    echo "</table>\n";
+    oci_close($conn);
 }
+?>
+</html>

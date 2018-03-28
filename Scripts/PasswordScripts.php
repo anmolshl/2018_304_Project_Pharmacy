@@ -8,7 +8,7 @@
 
 //Check password match
 function checkPass1Pass2($password1, $password2){
-    if($password1 == $password2){
+    if (strcmp($password1,$password2)){
         return true;
     }
     else{
