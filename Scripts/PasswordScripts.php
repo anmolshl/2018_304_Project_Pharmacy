@@ -8,12 +8,16 @@
 
 //Check password match
 function checkPass1Pass2($password1, $password2){
-    if($password1 == $password2){
+<<<<<<< HEAD
+    return strcmp($password1,$password2);
+=======
+    if (strcmp($password1,$password2)){
         return true;
     }
     else{
         return false;
     }
+>>>>>>> 6822184b64e647d42e012a06b9520cd86979738e
 }
 
 //Password encryption

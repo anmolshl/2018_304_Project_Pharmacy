@@ -24,6 +24,16 @@ else {
         $employeeCheck = 1;
     }
     oci_free_statement($employeeCheckQueryOCI);
+    $custNo = "";
+    $custNoQuery = "select customer_number from RegCustomer where username='".$userName."'";
+    $custNoQueryOci = oci_parse($conn, $custNoQuery);
+    selectQuery($conn, $custNoQuery);
+    while($row = oci_fetch_array($custNoQueryOci, OCI_ASSOC+OCI_RETURN_NULLS)){
+        foreach ($row as $item){
+            $custNo = $item;
+        }
+    }
+    oci_free_statement($custNoQueryOci);
     $passwordQuery = "select password from UserTab where username='".$userName."'";
     $ociPasswordQuery = oci_parse($conn, $passwordQuery);
     selectQuery($conn, $ociPasswordQuery);
@@ -36,11 +46,12 @@ else {
                 $checkPass = 1;
                 session_start();
                 $_SESSION['userName'] = $userName;
+                $_SESSION['custNo'] = $custNo;
                 if($employeeCheck == 1){
                     header("Location: EmpDatRetr.php");
                 }
                 else{
-                    header("Location: RegCustDatRetr.php");
+                    header("Location: RegDisp.php");
                 }
                 break;
             }

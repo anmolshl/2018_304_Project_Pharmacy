@@ -38,6 +38,7 @@ else {
         echo "<td>Drug Type</td>\n";
         echo "<td>Illness</td>\n";
         echo "<td>Price</td>\n";
+        echo "<td>Quantity</td>";
         echo "</tr>\n";
     }
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -45,6 +46,7 @@ else {
         foreach ($row as $item) {
             echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
+        echo "<td><input type='number'></td>";
         echo "</tr>\n";
     }
     echo "</table>\n";
