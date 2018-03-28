@@ -1,4 +1,8 @@
 <html lang="en" style="background-color: beige">
+<?php
+$userName = $_GET['userName'];
+$custNo = $_GET['custNo'];
+?>
 <head>
     <meta charset="UTF-8">
     <title>Welcome Guest!</title>
@@ -16,6 +20,13 @@
         <input id="search_key" type="text" name="search_key" placeholder="Enter drug name" style="width: 200px">
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
+    <?php
+    if(!(empty($userName) && empty($custNo))){
+        echo "<div class=\"container\" align=\"center\" style=\"margin-top: 20px;\">";
+        echo "<a href=\"../Interfaces/LoginPage.html\" style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Logout</a>";
+        echo "</div>\n";
+    }
+    ?>
 </div>
 </body>
 <?php

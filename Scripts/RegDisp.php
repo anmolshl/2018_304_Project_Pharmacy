@@ -39,26 +39,25 @@ else {
         </a>
     </b>
 </div>
-<form action="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>">
-    <div class="container" align="center" style="margin-top: 20px;">
-        <button type="submit" style="width: 70px">Search</button>
-    </div>
-</form>
-<form action="PrescriptionsRetr.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>">
-    <div class="container" align="center">
-        <button type="submit" style="width: 80px;">Prescriptions</button>
-    </div>
-</form>
-<form action="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>">
-    <div class="container" align="center">
-        <button type="submit" style="width: 70px;">Orders</button>
-    </div>
-</form>
-</form>
-<form action="../Interfaces/LoginPage.html">
-    <div class="container" align="center">
-        <button type="submit" style="width: 70px;">Logout</button>
-    </div>
-</form>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Search Drugs
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href=PrescriptionsRetr.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Prescriptions
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="Orders.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Orders
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="../Interfaces/LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Logout
+    </a>
+</div>
 </body>
 </html>
