@@ -32,20 +32,20 @@ else {
 <div align="center" >
     <b style="font-family: 'American Typewriter'; font-size: 15px">Online drug reservation system</b>
 </div>
-<form action="../Interfaces/LoginPage.html">
-    <div class="container" align="center" style="margin-top: 20px;">
-        <button type="submit" style="width: 70px">Login</button>
-    </div>
-</form>
-<form action="../Interfaces/CustomerSignUp.html">
-    <div class="container" align="center">
-        <button type="submit" style="width: 70px;">Sign Up</button>
-    </div>
-</form>
-<form action="SearchPage.php">
-    <div class="container" align="center">
-        <button type="submit" style="width: 70px;">Guest</button>
-    </div>
-</form>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="../Interfaces/LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Login
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="../Interfaces/CustomerSignUp.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Sign Up
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
+    <a href="SearchPage.php" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Continue as Guest
+    </a>
+</div>
 </body>
 </html>
