@@ -40,17 +40,21 @@ else {
     $ociPasswordQuery = oci_parse($conn, $passwordQuery);
     selectQuery($conn, $ociPasswordQuery);
     $i = 0;
+    $userDets = array();
     while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)){
         ++$i;
         $checkPass = 0;
         foreach ($row as $item) {
             if (checkPass1Pass2($item, $password)){
+                array_push($userDets, $userName);
+                array_push($userDets, $custNo);
+                $userDetsQuery = http_build_query($userDets);
                 $checkPass = 1;
                 if($employeeCheck == 1){
-                    header("Location: EmpDisp.php?userName='".$userName."'&custNo='".$custNo."'");
+                    header("Location: EmpDisp.php?".$userDetsQuery);
                 }
                 else{
-                    header("Location: RegDisp.php?userName='".$userName."'&custNo='".$custNo."'");
+                    header("Location: RegDisp.php?".$userDetsQuery);
                 }
                 break;
             }

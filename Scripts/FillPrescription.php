@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<form action="../Scripts/Prescription.php" method="get">
+<form action="../Scripts/Prescription.php?userDets=<?php echo $userDetsQuery; ?>" method="get">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
         <b style="font-family: 'American Typewriter'; font-size: 30px">
             <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
@@ -16,7 +16,7 @@
         </b>
     </div>
     <div class="container" align="center">
-        <input name="refill" type="number" name="refill" placeholder="Refill?" required>
+        <input name="refill" type="number" min="0" name="refill" placeholder="Refill" required>
     </div>
     <div class="container" align="center">
         <input name="expire" type="date" name="expire" placeholder="Expiration" required>

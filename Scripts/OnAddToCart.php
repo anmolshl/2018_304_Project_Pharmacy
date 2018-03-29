@@ -11,30 +11,42 @@ if(!$conn){
     exit;
 }
 else{
-    $drugName = $_GET['drugName'];
-    $drugType = $_GET['drugType'];
-    $userName = $_GET['userName'];
-    $custNo = $_GET['custNo'];
-    $price = $_GET['price'];
+
+    $drugName = $_GET['2'];
+    $drugType = $_GET['3'];
+    $userName = $_GET['0'];
+    $custNo = $_GET['1'];
+    $price = $_GET['4'];
 
     echo $drugType;
     echo $drugName;
     echo $price;
 
-    $rowArr = array();
-    array_push($rowArr, $drugName);
-    array_push($rowArr, $drugType);
-    array_push($rowArr, $price);
-
-    $cartArr = $_GET['$cartArray'];
-    if(empty($cartArr)){
-        $cartArr = array();
+    $cartArr = array();
+    $i = 7;
+    while (!empty($_GET[strval($i)])){
+        array_push($cartArr, $_GET[strval($i)]);
+        $i++;
     }
-    array_push($cartArr, $rowArr);
 
-    $URLquery = http_build_query($cartArr);
+    $i = 0;
+
+    array_push($cartArr, $drugName);
+    array_push($cartArr, $drugType);
+    array_push($cartArr, $price);
+
+    $queryArrUnparsed = array();
+
+    array_push($queryArrUnparsed, $userName);
+    array_push($queryArrUnparsed, $custNo);
+
+    foreach ($cartArr as $cartx){
+        array_push($queryArrUnparsed, $cartx);
+    }
+
+    $URLquery = http_build_query($queryArrUnparsed);
     echo $userName;
     echo $custNo;
-    //header("Location: RegDisp.php?cartArr=".$URLquery."&userName=".$userName."&custNo=".$custNo);
+    header("Location: RegDisp.php?".$URLquery);
 }
 ?>

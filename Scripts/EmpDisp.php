@@ -1,8 +1,11 @@
 <html lang="en" style="background-color: beige">
 <?php
+$userDetsQuery = $_GET['userDets'];
+$userDets = array();
+parse_str($userDetsQuery, $userDets);
 
-$userName = $_GET['userName'];
-$custNo = $_GET['custNo'];
+$userName = $userDets[0];
+$custNo = $userDets[1];
 
 if(empty($userName)){
     header("Location: ../Interfaces/LoginPage.html");
@@ -33,18 +36,18 @@ else {
 <body>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
     <b style="font-family: 'American Typewriter'; font-size: 30px">
-        <a href="EmpDisp.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000;">
+        <a href="EmpDisp.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000;">
             PharmTech
         </a>
     </b>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href=../Interfaces/FillPrescription.html?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href=FillPrescription.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Fill Prescriptions
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="Restock.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href="FillStock.php?userName=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Restock
     </a>
 </div>
