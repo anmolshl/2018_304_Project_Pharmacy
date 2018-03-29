@@ -21,6 +21,7 @@ $cartArr = $_GET['cartArr'];
         echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
+        echo "<input type='hidden' name='cartArr' value='".htmlentities($cartArr,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
         echo "<div class=\"container\" align=\"center\" style=\"margin-top: 20px;\">";
@@ -35,6 +36,7 @@ $cartArr = $_GET['cartArr'];
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
         echo "<form action='SearchPage.php?' method='get'>\n";
+        echo "<input type='hidden' name='cartArr' value='".htmlentities($cartArr,ENT_QUOTES)."'>\n";
         echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
@@ -73,7 +75,7 @@ else {
             $validRow = 1;
             $item0 = $item;
             echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-            array_push($rowArr, $item);
+            array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
         }
         if($validRow == 1) {
             echo "<td>";

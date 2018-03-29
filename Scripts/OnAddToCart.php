@@ -21,7 +21,6 @@ else{
     echo $drugName;
     echo $price;
 
-
     $rowArr = array();
     array_push($rowArr, $drugName);
     array_push($rowArr, $drugType);
@@ -34,6 +33,8 @@ else{
     array_push($cartArr, $rowArr);
 
     $URLquery = http_build_query($cartArr);
-    header("Location: RegDisp.php?cartArr=".$URLquery."&userName=".$userName."&custNo=".$custNo);
+    echo $userName;
+    echo $custNo;
+    //header("Location: RegDisp.php?cartArr=".$URLquery."&userName=".$userName."&custNo=".$custNo);
 }
 ?>

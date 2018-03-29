@@ -5,7 +5,7 @@ $userName = $_GET['userName'];
 $custNo = $_GET['custNo'];
 
 if(empty($userName) || empty($custNo)){
-    header("Location: ../Interfaces/LoginPage.html");
+    //header("Location: ../Interfaces/LoginPage.html");
 }
 
 echo $userName;
