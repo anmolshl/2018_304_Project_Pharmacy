@@ -11,11 +11,17 @@ if(!$conn){
     exit;
 }
 else{
-    $drugName = $_GET['drugName'];
-    $drugType = $_GET['drugType'];
-    $userName = $_GET['userName'];
-    $custNo = $_GET['custNo'];
-    $price = $_GET['price'];
+    $drugDet = array();
+    $drugDetParsed = array();
+
+    parse_str($_GET['drugDet'], $drugDet);
+
+    $drugDetx = $drugDet[0];
+    $drugName = $drugDetx[0];
+    $drugType = $drugDetx[1];
+    $userName = $drugDet[2];
+    $custNo = $drugDet[3]
+    $price = $drugDetx[3];
 
     echo $drugType;
     echo $drugName;

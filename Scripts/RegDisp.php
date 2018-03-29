@@ -1,5 +1,11 @@
 <html lang="en" style="background-color: beige">
 <?php
+$userDetsQuery = $_GET['userDets'];
+$userDets = array();
+parse_str($userDetsQuery, $userDets);
+
+$userName = $userDets[0];
+$custNo = $userDets[1];
 
 $userName = $_GET['userName'];
 $custNo = $_GET['custNo'];
