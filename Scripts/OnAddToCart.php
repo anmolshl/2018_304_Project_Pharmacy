@@ -5,6 +5,7 @@
  * Date: 2018-03-27
  * Time: 3:14 PM
  */
+require "SQLQuery.php";
 $conn = oraConnect();
 if(!$conn){
     exit;
@@ -12,7 +13,14 @@ if(!$conn){
 else{
     $drugName = $_GET['drugName'];
     $drugType = $_GET['drugType'];
+    $userName = $_GET['userName'];
+    $custNo = $_GET['custNo'];
     $price = $_GET['price'];
+
+    echo $drugType;
+    echo $drugName;
+    echo $price;
+
 
     $rowArr = array();
     array_push($rowArr, $drugName);
@@ -26,6 +34,6 @@ else{
     array_push($cartArr, $rowArr);
 
     $URLquery = http_build_query($cartArr);
-    header("Location: RegDisp.php?cartArr=".$URLquery);
+    header("Location: RegDisp.php?cartArr=".$URLquery."&userName=".$userName."&custNo=".$custNo);
 }
 ?>
