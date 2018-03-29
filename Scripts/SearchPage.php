@@ -58,7 +58,7 @@ $cartArr = $_GET['cartArr'];
         echo "</form>";
     }
     ?>
-</div>
+    </div>
 </body>
 <?php
 require "SQLQuery.php";
@@ -69,34 +69,37 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $WordSearch = $_GET['search_key'];
-    $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
-    $ociQuery = oci_parse($conn, $drugRetr);
-    selectQuery($conn, $ociQuery);
-    if($WordSearch != null) {
-        echo "<table border='1' align='center'>\n";
-        echo "<tr>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Name</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Type</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illness</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Price</td>\n";
-        echo "</tr>\n";
-    }
-    while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
-        echo "<tr>\n";
-        $item0 = null;
-        $validRow = 0;
-        $rowArr = array();
-        foreach($row as $item) {
-            $validRow = 1;
-            $item0 = $item;
-            echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-            array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
+    if (isset($_GET['search_key'])) {
+        $WordSearch = $_GET['search_key'];
+        $drugRetr = "SELECT drug_name, drugType, illness_name, price FROM Drugs WHERE drug_name='" . $WordSearch . "'";
+        $ociQuery = oci_parse($conn, $drugRetr);
+        selectQuery($conn, $ociQuery);
+        if ($WordSearch != null) {
+            echo "<table border='1' align='center'>\n";
+            echo "<tr>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Name</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Type</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illness</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Price</td>\n";
+            echo "</tr>\n";
         }
-        if($validRow == 1) {
-            echo "<td>";
-            echo "<a href='OnAddToCart.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "&cartArr=" . $cartArr . "&userName=" .$userName."&custNo=". $custNo ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
-            echo "</td>";
+        while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo "<tr>\n";
+            $item0 = null;
+            $validRow = 0;
+            $rowArr = array();
+            foreach ($row as $item) {
+                $validRow = 1;
+                $item0 = $item;
+                echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
+            }
+            if ($validRow == 1) {
+                echo "<td>";
+                echo "<a href='OnAddToCart.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "&cartArr=" . $cartArr . "&userName=" .$userName."&custNo=". $custNo ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+                echo "</td>";
+            }
+            echo "</tr>\n";
         }
         echo "</table>\n";
     } else if (isset($_GET['count_key'])) {
@@ -119,7 +122,7 @@ else {
                 $validRow = 1;
                 $item0 = $item;
                 echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-                array_push($rowArr, $item);
+                array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
             }
             echo "</tr>\n";
         }
@@ -160,7 +163,12 @@ else {
                     $validRow = 1;
                     $item0 = $item;
                     echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-                    array_push($rowArr, $item);
+                    array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
+                }
+                if ($validRow == 1) {
+                    echo "<td>";
+                    echo "<a href='OnAddToCart.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "&cartArr=" . $cartArr . "&userName=" .$userName."&custNo=". $custNo ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+                    echo "</td>";
                 }
                 echo "</tr>\n";
             }
@@ -171,7 +179,6 @@ else {
 }
 ?>
 </html>
-
 
 
 
