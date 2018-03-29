@@ -2,6 +2,7 @@
 <?php
 $userName = $_GET['userName'];
 $custNo = $_GET['custNo'];
+$cartArr = $_GET['cartArr'];
 ?>
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@ $custNo = $_GET['custNo'];
     if(!(empty($userName) && empty($custNo))){
         echo "<div align=\"center\" style=\"margin-bottom: 40px; margin-top: 20px; background-color: red\">";
         echo "<b style=\"font-family: 'American Typewriter'; font-size: 30px\">";
-        echo "<a href=\"RegDisp.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>\" style=\"text-decoration: none; color: #000000;\">PharmTech</a>";
+        echo "<a href=\"RegDisp.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>\" style=\"text-decoration: none; color: #000000;\">PharmTech</a>";
         echo "</b>";
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
@@ -76,7 +77,7 @@ else {
         }
         if($validRow == 1) {
             echo "<td>";
-            echo "<a href='OnSelectDrug.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+            echo "<a href='OnAddToCart.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "&cartArr=" . $cartArr ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
             echo "</td>";
         }
         echo "</tr>\n";
