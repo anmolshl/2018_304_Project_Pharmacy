@@ -51,10 +51,10 @@ else {
                 $userDetsQuery = http_build_query($userDets);
                 $checkPass = 1;
                 if($employeeCheck == 1){
-                    header("Location: EmpDisp.php?userDets=".$userDetsQuery);
+                    header("Location: EmpDisp.php?".$userDetsQuery);
                 }
                 else{
-                    header("Location: RegDisp.php?userDets=".$userDetsQuery);
+                    header("Location: RegDisp.php?".$userDetsQuery);
                 }
                 break;
             }
