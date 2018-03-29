@@ -38,7 +38,7 @@ else {
     echo "<table border='1'>\n";
     echo "<tr>\n";
     echo "<td>Drug Name</td>\n";
-    echo "<td>Refill</td>\n"; 
+    echo "<td>Refill</td>\n";
      echo "<td>Expiration</td>\n";
     echo "<td>Prescription_number</td>\n";
     echo "<td>Issued Date</td>\n";
