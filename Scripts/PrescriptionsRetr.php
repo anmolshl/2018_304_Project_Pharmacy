@@ -31,7 +31,10 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $PrescriptionQuery = "SELECT expiration, prescription_number, issued_date FROM Prescription WHERE username = '".$userName."'";
+    date_default_timezone_set('Canada/Vancouver');
+    $date = date('d-m-Y');
+    echo "$date";
+    $PrescriptionQuery = "SELECT expiration, prescription_number, issued_date FROM Prescription WHERE username = '".$userName."' AND expiration >= CAST(CURRENT_TIMESTAMP AS DATE)";
     $ociQuery = oci_parse($conn, $PrescriptionQuery);
     oci_execute($ociQuery);
     selectQuery($conn, $ociQuery);

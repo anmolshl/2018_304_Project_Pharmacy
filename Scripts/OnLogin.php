@@ -47,7 +47,7 @@ else {
             if (checkPass1Pass2($item, $password)){
                 $checkPass = 1;
                 if($employeeCheck == 1){
-                    header("Location: EmpDatRetr.php?userName='".$userName."'&custNo='".$custNo."'");
+                    header("Location: EmpDisp.php?userName='".$userName."'&custNo='".$custNo."'");
                 }
                 else{
                     header("Location: RegDisp.php?userName='".$userName."'&custNo='".$custNo."'");

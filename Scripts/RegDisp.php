@@ -24,6 +24,7 @@ if (!$conn) {
 }
 else {
     print "Connected to Oracle!";
+    $cartArr = $_GET['cartArr'];
 }
 ?>
 
@@ -34,28 +35,36 @@ else {
 <body>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
     <b style="font-family: 'American Typewriter'; font-size: 30px">
-        <a href="RegDisp.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000;">
+        <a href="RegDisp.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000;">
             PharmTech
         </a>
     </b>
 </div>
+<?php
+$cartArrParsed = array();
+parse_str($cartArr,$cartArrParsed);
+echo "<div align=\"center\" style=\"margin-top: 20px;\">";
+echo "<a href=\"Cart.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>\" style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Cart(".count($cartArrParsed).")</a>";
+echo "</div>"
+?>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Search Drugs
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
+<<<<<<< HEAD
     <a href="SearchPagePathogens.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Search Pathogens and Symptoms
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href=PrescriptionsRetr.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href=PrescriptionsRetr.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Prescriptions
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="Orders.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href="Orders.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Orders
     </a>
 </div>
