@@ -38,7 +38,7 @@ function selectQuery($conn, $sql){
 }
 
 function oraConnect(){
-    $conn = $conn = oci_connect("ora_q5c1b", "a51931153", "dbhost.ugrad.cs.ubc.ca:1522/ug");
+    $conn = $conn = oci_connect("ora_v3c8", "a52404100", "dbhost.ugrad.cs.ubc.ca:1522/ug");
     if (!$conn) {
         $m = oci_error();
         echo $m['message'], "\n";

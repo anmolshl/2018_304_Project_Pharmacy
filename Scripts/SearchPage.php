@@ -22,6 +22,22 @@ $custNo = $_GET['custNo'];
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
+        echo "<form action='SearchPage.php?' method='get'>\n";
+        echo "<input id='count_key' type='text' name='count_key' placeholder='Enter drugType' style=\"width: 200px\">\n";
+        echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
+        echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
+        echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
+        echo "</form>";
+        echo "<form action='SearchPage.php?' method='get'><div style='margin: 0;padding: 0'>\n";
+        echo "<div>";
+        //echo "<label for='min'>Min Price</label>";
+        echo "<input id='min_key' type='text' name='min_key'  placeholder='Min Price' style=\"width: 100px\">\n";
+        //echo "<label for='max'>Max Price</label>";
+        echo "<input id='max_key' type='text' name='max_key'  placeholder='Max Price' style=\"width: 100px\">\n";
+        echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
+        echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
+        echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
+        echo "</form>";
         echo "<div class=\"container\" align=\"center\" style=\"margin-top: 20px;\">";
         echo "<a href=\"../Interfaces/LoginPage.html\" style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Logout</a>";
         echo "</div>\n";
@@ -50,38 +66,107 @@ if (!$conn) {
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $WordSearch = $_GET['search_key'];
-    $drugRetr = "select drug_name, drugType, illness_name, price from Drugs where drug_name='".$WordSearch."'";
-    $ociQuery = oci_parse($conn, $drugRetr);
-    selectQuery($conn, $ociQuery);
-    if($WordSearch != null) {
-        echo "<table border='1' align='center'>\n";
-        echo "<tr>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Name</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Type</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illness</td>\n";
-        echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Price</td>\n";
-        echo "</tr>\n";
-    }
-    while ($row = oci_fetch_array($ociQuery, OCI_ASSOC+OCI_RETURN_NULLS)) {
-        echo "<tr>\n";
-        $item0 = null;
-        $validRow = 0;
-        $rowArr = array();
-        foreach($row as $item) {
-            $validRow = 1;
-            $item0 = $item;
-            echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-            array_push($rowArr, $item);
+    if (isset($_GET['search_key'])) {
+        $WordSearch = $_GET['search_key'];
+        $drugRetr = "SELECT drug_name, drugType, illness_name, price FROM Drugs WHERE drug_name='" . $WordSearch . "'";
+        $ociQuery = oci_parse($conn, $drugRetr);
+        selectQuery($conn, $ociQuery);
+        if ($WordSearch != null) {
+            echo "<table border='1' align='center'>\n";
+            echo "<tr>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Name</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Type</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illness</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Price</td>\n";
+            echo "</tr>\n";
         }
-        if($validRow == 1) {
-            echo "<td>";
-            echo "<a href='OnSelectDrug.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
-            echo "</td>";
+        while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo "<tr>\n";
+            $item0 = null;
+            $validRow = 0;
+            $rowArr = array();
+            foreach ($row as $item) {
+                $validRow = 1;
+                $item0 = $item;
+                echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                array_push($rowArr, $item);
+            }
+            if ($validRow == 1) {
+                echo "<td>";
+                echo "<a href='OnSelectDrug.php?action&drugName=" . $rowArr[0] . "&drugType=" . $rowArr[1] . "&price=" . (string)$rowArr[3] . "' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+                echo "</td>";
+            }
+            echo "</tr>\n";
         }
-        echo "</tr>\n";
+        echo "</table>\n";
+    } else if (isset($_GET['count_key'])) {
+        $WordSearch = $_GET['count_key'];
+        $drugRetr = "select count(drugType) from Drugs where drugType = '" . $WordSearch . "'";
+        $ociQuery = oci_parse($conn, $drugRetr);
+        selectQuery($conn, $ociQuery);
+        if ($WordSearch != null) {
+            echo "<table border='1' align='center'>\n";
+            echo "<tr>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Count</td>\n";
+            echo "</tr>\n";
+        }
+        while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo "<tr>\n";
+            $item0 = null;
+            $validRow = 0;
+            $rowArr = array();
+            foreach ($row as $item) {
+                $validRow = 1;
+                $item0 = $item;
+                echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                array_push($rowArr, $item);
+            }
+            echo "</tr>\n";
+        }
+        echo "</table>\n";
+    } else if ((isset($_GET['min_key'])) && isset($_GET['max_key'])) {
+        $maxsearch = $_GET['max_key'];
+        $WordSearch = $_GET['min_key'];
+        $drugRetr = null;
+
+        if (($maxsearch != null) && ($WordSearch != null)) {
+            $drugRetr = "SELECT drug_name, drugType, price, illness_name FROM Drugs 
+        WHERE price >= (SELECT Min(" . $WordSearch . ") FROM Drugs) AND 
+        price <= (SELECT Max(" . $maxsearch . ") FROM Drugs) ORDER BY price DESC";
+        } else if (($WordSearch == null) && ($maxsearch != null)) {
+            $drugRetr = "select drug_name, drugType, price, illness_name from Drugs 
+        where price >= (select Max(". $maxsearch.") from Drugs) ORDER BY price DESC";
+        } else if (($maxsearch == null) && ($WordSearch != null)) {
+            $drugRetr = "select drug_name, drugType, price, illness_name from Drugs 
+        where price >= (select Min(". $WordSearch.") from Drugs) ORDER BY price DESC";
+        }
+        if ($drugRetr != null) {
+            $ociQuery = oci_parse($conn, $drugRetr);
+            selectQuery($conn, $ociQuery);
+            echo "<table border='1' align='center'>\n";
+            echo "<tr>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Name</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Type</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Price</td>\n";
+            echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illness</td>\n";
+            echo "</tr>\n";
+
+            while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                echo "<tr>\n";
+                $item0 = null;
+                $validRow = 0;
+                $rowArr = array();
+                foreach ($row as $item) {
+                    $validRow = 1;
+                    $item0 = $item;
+                    echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                    array_push($rowArr, $item);
+                }
+                echo "</tr>\n";
+            }
+            echo "</table>\n";
+        }
     }
-    echo "</table>\n";
     oci_close($conn);
 }
 ?>
