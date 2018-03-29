@@ -11,7 +11,7 @@
             margin-right: auto;
             padding: 0;
             overflow: hidden;
-            background-color: #FFFFFF;
+            background-color: #FFA488;
             text-align:center;
         }
 
@@ -46,12 +46,24 @@
 </form>
 
 <ul class="nav">
-    <li><a href="EmployeePage.html">Home</a></li>
+    <li><a href="EmployeePage.html">Home</a>
     <li><a href="StockPage.html">Stock</a></li>
     <li><a href="PrescriptionPage.html">Prescriptions</a></li>
     <li><a href="CustomerInfoPage.html">Customers</a></li>
     <li><a href="EmployeeInfoPage.html">Employees</a></li>
 </ul>
+
+<form action="../Scripts/Stock.php" method="get">
+    <div class="container" >
+        <BUTTON name="check_all"type="button">Check All Employee information</BUTTON>
+    </div>
+    <div class="container" >
+        <input type="text" placeholder="Input employee name">
+        <BUTTON name="check_by_name" type="button">Check All Employee information by name</BUTTON>
+    </div>
+</form>
+
+
 
 </body>
 </html>
