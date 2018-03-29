@@ -1,5 +1,4 @@
 
-
 <?php
 require "SQLQuery.php";
 $conn = oraConnect();
@@ -22,5 +21,7 @@ VALUES('" . $refill . "','" . $expire . "','" . $cnum . "','" . $name . "','" . 
     insertQuery($conn, $prescriptioninsParse);
     oci_close($conn);
 }
+
+
 
 
