@@ -8,7 +8,13 @@
 
 //Check password match
 function checkPass1Pass2($password1, $password2){
-    return strcmp($password1,$password2);
+    echo strcmp(str_replace(' ', '', $password1), str_replace(' ', '', $password2));
+    if(strcmp(str_replace(' ', '', $password1), str_replace(' ', '', $password2)) == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 //Password encryption
