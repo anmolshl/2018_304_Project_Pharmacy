@@ -4,7 +4,7 @@
     <title>Welcome User!</title>
 </head>
 <body>
-<h1 style="color: #001111;">Orders</h1>
+<h1 style="color: #001111;">Prescriptions</h1>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
     <b style="font-family: 'American Typewriter'; font-size: 30px">
         <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
