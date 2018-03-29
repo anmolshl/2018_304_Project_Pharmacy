@@ -71,7 +71,7 @@ else {
     echo "<br>Connected to Oracle!</br>";
     if (isset($_GET['search_key'])) {
         $WordSearch = $_GET['search_key'];
-        $drugRetr = "SELECT drug_name, drugType, illness_name, price FROM Drugs WHERE drug_name='" . $WordSearch . "'";
+        $drugRetr = "SELECT drug_name, drugType, price, illness_name FROM Drugs WHERE drug_name='" . $WordSearch . "'";
         $ociQuery = oci_parse($conn, $drugRetr);
         selectQuery($conn, $ociQuery);
         if ($WordSearch != null) {
@@ -96,12 +96,21 @@ else {
             }
             if ($validRow == 1) {
                 echo "<td>";
-                $queryArr = array();
-                array_push($rowArr, $cartArr);
-                array_push($queryArr, $userName);
-                array_push($queryArr, $custNo);
-                $drugDetQ = http_build_query($queryArr);
-                echo "<a href='OnAddToCart.php?action&drugDet=" . $drugDetQ ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+                $queryArrUnparsed = array();
+                array_push($queryArrUnparsed, $userName);
+                array_push($queryArrUnparsed, $custNo);
+                foreach ($rowArr as $itemx){
+                    array_push($queryArrUnparsed, $itemx);
+                }
+
+                $cartArrUnparsed = array();
+                parse_str($cartArr, $cartArrUnparsed);
+                foreach ($cartArrUnparsed as $cartItem){
+                    array_push($queryArrUnparsed, $cartItem);
+                }
+
+                $drugDetQ = http_build_query($queryArrUnparsed);
+                echo "<a href='OnAddToCart.php?" . $drugDetQ ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
                 echo "</td>";
             }
             echo "</tr>\n";
@@ -172,8 +181,21 @@ else {
                 }
                 if ($validRow == 1) {
                     echo "<td>";
-                    $drugDetQ = http_build_query($rowArr);
-                    echo "<a href='OnAddToCart.php?action&drugDet=" . $drugDetQ . "&cartArr=" . $cartArr . "&userName=" .$userName."&custNo=". $custNo ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
+                    $queryArrUnparsed = array();
+                    array_push($queryArrUnparsed, $userName);
+                    array_push($queryArrUnparsed, $custNo);
+                    foreach ($rowArr as $itemx){
+                        array_push($queryArrUnparsed, $itemx);
+                    }
+
+                    $cartArrUnparsed = array();
+                    parse_str($cartArr, $cartArrUnparsed);
+                    foreach ($cartArrUnparsed as $cartItem){
+                        array_push($queryArrUnparsed, $cartItem);
+                    }
+
+                    $drugDetQ = http_build_query($queryArrUnparsed);
+                    echo "<a href='OnAddToCart.php?" . $drugDetQ ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
                     echo "</td>";
                 }
                 echo "</tr>\n";
