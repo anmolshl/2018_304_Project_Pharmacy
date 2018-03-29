@@ -53,6 +53,12 @@ echo "</div>"
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
+<<<<<<< HEAD
+    <a href="SearchPagePathogens.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Search Pathogens and Symptoms
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
     <a href=PrescriptionsRetr.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&cartArr=<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Prescriptions
     </a>
