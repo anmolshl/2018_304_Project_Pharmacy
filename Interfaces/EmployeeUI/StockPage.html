@@ -11,7 +11,7 @@
             margin-right: auto;
             padding: 0;
             overflow: hidden;
-            background-color: #FFFFFF;
+            background-color: #FFA488;
             text-align:center;
         }
 
@@ -31,6 +31,10 @@
         li a:hover {
             background-color: red;
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
     </style>
 
 </head>
@@ -46,12 +50,29 @@
 </form>
 
 <ul class="nav">
-    <li><a href="EmployeePage.html">Home</a></li>
+    <li><a href="EmployeePage.html">Home</a>
     <li><a href="StockPage.html">Stock</a></li>
     <li><a href="PrescriptionPage.html">Prescriptions</a></li>
-    <li><a href="#Customers">Customers</a></li>
-    <li><a href="#Employees">Employees</a></li>
+    <li><a href="CustomerInfoPage.html">Customers</a></li>
+    <li><a href="EmployeeInfoPage.html">Employees</a></li>
 </ul>
+<form>
+    <div class="container" action="../Scripts/Stock.php" method="get">
+        <input id="username" type="text" name="stock_ID" placeholder="Put in stock ID" required>
+        <BUTTON type="button" placeholder="Restock">Check stock information</BUTTON>
+    </div>
+    <div class="container">
+        <input type="text" name="drug_name" placeholder="Drug Name">
+        <input type="text" name="drug_add" placeholder="Added Amount">
+        <input type="number" name="stock_ID">
+        <BUTTON name="restock" type="button" placeholder="Restock">Restock</BUTTON>
+    </div>
+    <div class="container">
+        <input type="text" name="drug_name" placeholder="Drug Name">
+        <BUTTON name="check_drug" type="button" placeholder="Restock">Check Drug Information</BUTTON>
+    </div>
+</form>
+
 
 </body>
 </html>
