@@ -54,6 +54,11 @@ else {
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
+    <a href=DeleteUser.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+        Delete User
+    </a>
+</div>
+<div class="container" align="center" style="margin-top: 20px;">
     <a href="../Interfaces/LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Logout
     </a>
