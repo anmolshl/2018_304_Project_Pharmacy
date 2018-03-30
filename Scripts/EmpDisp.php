@@ -7,8 +7,10 @@ parse_str($userDetsQuery, $userDets);
 $userName = $userDets[0];
 $custNo = $userDets[1];
 
+echo $userName;
+
 if(empty($userName)){
-    header("Location: ../Interfaces/LoginPage.html");
+    //header("Location: ../Interfaces/LoginPage.html");
 }
 
 echo $userName;

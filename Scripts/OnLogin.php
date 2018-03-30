@@ -10,15 +10,16 @@
 require "PasswordScripts.php";
 require "SQLQuery.php";
 //Get data from HTML form
-$userName = $_GET['userName'];
-$password = $_GET['password'];
+$userName = str_replace(' ', '', $_GET['userName']);
+$password = str_replace(' ', '', $_GET['password']);
+
 $conn = oraConnect();
 if (!$conn) {
     exit;
 }
 else {
     echo "<br>Connected to Oracle!</br>";
-    $employeeCheckQuery = "select username from Pharmtech where username = '".$userName."'";
+    $employeeCheckQuery = "select username from Pharmtech where username='".$userName."'";
     $employeeCheck = 0;
     $employeeCheckQueryOCI = oci_parse($conn, $employeeCheckQuery);
     selectQuery($conn, $employeeCheckQueryOCI);
@@ -41,29 +42,35 @@ else {
     selectQuery($conn, $ociPasswordQuery);
     $i = 0;
     $userDets = array();
+    echo $userName;
+    echo $password;
+    echo $employeeCheck;
     while($row = oci_fetch_array($ociPasswordQuery, OCI_ASSOC+OCI_RETURN_NULLS)){
         ++$i;
         $checkPass = 0;
         foreach ($row as $item) {
             if (checkPass1Pass2($item, $password)){
-                array_push($userDets, $userName);
-                array_push($userDets, $custNo);
-                $userDetsQuery = http_build_query($userDets);
                 $checkPass = 1;
-                if($employeeCheck == 1){
-                    header("Location: EmpDisp.php?".$userDetsQuery);
+                if($employeeCheck === 1){
+                    array_push($userDets, $userName);
+                    $userDetsQuery = http_build_query($userDets);
+                    //header("Location: EmpDisp.php?".$userDetsQuery);
+                    echo "herex";
                 }
                 else{
-                    header("Location: RegDisp.php?".$userDetsQuery);
+                    array_push($userDets, $userName);
+                    array_push($userDets, $custNo);
+                    $userDetsQuery = http_build_query($userDets);
+                    //header("Location: RegDisp.php?".$userDetsQuery);
                 }
                 break;
             }
         }
         if($checkPass == 0){
-            header('Location: ../Interfaces/LoginPageWrongPass.html');
+            //header('Location: ../Interfaces/LoginPageWrongPass.html');
         }
     }
     if($i == 0){
-        header('Location: ../Interfaces/LoginPageNoUser.html');
+        //header('Location: ../Interfaces/LoginPageNoUser.html');
     }
 }

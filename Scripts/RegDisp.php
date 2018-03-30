@@ -13,7 +13,7 @@ foreach ($userDets as $x){
 }
 
 if(empty($userName) || empty($custNo)){
-    //header("Location: ../Interfaces/LoginPage.html");
+    header("Location: ../Interfaces/LoginPage.html");
 }
 
 /**
@@ -29,16 +29,6 @@ if (!$conn) {
 }
 else {
     print "Connected to Oracle!";
-    $cartArrx = array();
-    $i = 2;
-    while (!empty($_GET[strval($i)])){
-        array_push($cartArrx, $_GET[strval($i)]);
-        $i++;
-    }
-
-    $i = 0;
-
-    $cartArr = http_build_query($cartArrx);
 }
 ?>
 
@@ -54,12 +44,6 @@ else {
         </a>
     </b>
 </div>
-<?php
-$cartArrParsed = $cartArrx;
-echo "<div align=\"center\" style=\"margin-top: 20px;\">";
-echo "<a href=\"Cart.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&<?php if(!empty($cartArr)){echo $cartArr;} ?>\" style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Cart(".(int)(count($cartArrParsed)/3).")</a>";
-echo "</div>"
-?>
 <div class="container" align="center" style="margin-top: 20px;">
     <a href="SearchPage.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Search and Add to Order

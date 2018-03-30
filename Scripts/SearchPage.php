@@ -2,7 +2,6 @@
 <?php
 $userName = $_GET['userName'];
 $custNo = $_GET['custNo'];
-$cartArr = $_GET['cartArr'];
 ?>
 <head>
     <meta charset="UTF-8">
@@ -17,20 +16,21 @@ $cartArr = $_GET['cartArr'];
         echo "</b>";
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
-        echo "<form action='SearchPage.php?' method='get'>\n";
-        echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
+        ?>
+        <form action='SearchPage.php' method='get'>
+        <?php echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
-        echo "<input type='hidden' name='cartArr' value='".htmlentities($cartArr,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
-        echo "</form>";
-        echo "<form action='SearchPage.php?' method='get'>\n";
+        ?>
+        </form>
+        <?php echo "<form action='SearchPage.php' method='get'>\n";
         echo "<input id='count_key' type='text' name='count_key' placeholder='Enter drugType' style=\"width: 200px\">\n";
         echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
-        echo "<form action='SearchPage.php?' method='get'><div style='margin: 0;padding: 0'>\n";
+        echo "<form action='SearchPage.php' method='get'><div style='margin: 0;padding: 0'>\n";
         echo "<div>";
         //echo "<label for='min'>Min Price</label>";
         echo "<input id='min_key' type='text' name='min_key'  placeholder='Min Price' style=\"width: 100px\">\n";
@@ -52,7 +52,6 @@ $cartArr = $_GET['cartArr'];
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
         echo "<form action='SearchPage.php?' method='get'>\n";
-        echo "<input type='hidden' name='cartArr' value='".htmlentities($cartArr,ENT_QUOTES)."'>\n";
         echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
@@ -93,25 +92,6 @@ else {
                 $item0 = $item;
                 echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
                 array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
-            }
-            if ($validRow == 1) {
-                echo "<td>";
-                $queryArrUnparsed = array();
-                array_push($queryArrUnparsed, $userName);
-                array_push($queryArrUnparsed, $custNo);
-                foreach ($rowArr as $itemx){
-                    array_push($queryArrUnparsed, $itemx);
-                }
-
-                $cartArrUnparsed = array();
-                parse_str($cartArr, $cartArrUnparsed);
-                foreach ($cartArrUnparsed as $cartItem){
-                    array_push($queryArrUnparsed, $cartItem);
-                }
-
-                $drugDetQ = http_build_query($queryArrUnparsed);
-                echo "<a href='OnAddToCart.php?" . $drugDetQ ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
-                echo "</td>";
             }
             echo "</tr>\n";
         }
@@ -178,25 +158,6 @@ else {
                     $item0 = $item;
                     echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
                     array_push($rowArr, htmlentities(str_replace('  ', '', $item), ENT_QUOTES));
-                }
-                if ($validRow == 1) {
-                    echo "<td>";
-                    $queryArrUnparsed = array();
-                    array_push($queryArrUnparsed, $userName);
-                    array_push($queryArrUnparsed, $custNo);
-                    foreach ($rowArr as $itemx){
-                        array_push($queryArrUnparsed, $itemx);
-                    }
-
-                    $cartArrUnparsed = array();
-                    parse_str($cartArr, $cartArrUnparsed);
-                    foreach ($cartArrUnparsed as $cartItem){
-                        array_push($queryArrUnparsed, $cartItem);
-                    }
-
-                    $drugDetQ = http_build_query($queryArrUnparsed);
-                    echo "<a href='OnAddToCart.php?" . $drugDetQ ."' style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">ADD</a>";
-                    echo "</td>";
                 }
                 echo "</tr>\n";
             }
