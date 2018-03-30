@@ -25,7 +25,6 @@ else {
     echo "$restock\n";
     echo "$drug_name\n";
 
-
     $retrstockQuery = "SELECT quantity FROM Drugs WHERE drug_name='" . $drug_name . "'";
     $ociQuery = oci_parse($conn, $retrstockQuery);
     selectQuery($conn, $ociQuery);
@@ -33,13 +32,14 @@ else {
         echo "<tr>\n";
         foreach ($row as $item) {
             $fetch = (int)$item + $restock;
-            echo "$item\n";
         }
     }
-    echo $fetch."\n";
     $restockQuery = "UPDATE Drugs SET quantity=" . (string)$fetch . " WHERE drug_name='" . $drug_name ."'";
-    $restockParse = oci_parse($conn, $retstockQuery);
+    $restockParse = oci_parse($conn, $restockQuery);
     insertQuery($conn, $restockParse);
+    $restockQuery0 = "commit";
+    $restockParse0 = oci_parse($conn, $restockQuery0);
+    insertQuery($conn, $restockParse0);
     oci_close($conn);
 }
 ?>
