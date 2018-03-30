@@ -9,10 +9,6 @@ $custNo = $userDets[1];
 
 echo $userName;
 
-if(empty($userName)){
-    //header("Location: ../Interfaces/LoginPage.html");
-}
-
 echo $userName;
 
 /**

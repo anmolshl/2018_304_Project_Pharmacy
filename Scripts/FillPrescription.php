@@ -25,7 +25,7 @@
         <input name="c_num" type="number" name="c_num" placeholder="Customer Number" required>
     </div>
     <div class="container" align="center">
-        <input name="u_name" type="text" name="u_name" placeholder="Customer Name" required>
+        <input name="u_name" type="text" name="u_name" placeholder="Username" required>
     </div>
     <div class="container" align="center">
         <input name="issued_d" type="date" name="issued_d" placeholder="Issued Date (YYYY-MM-DD)" required>

@@ -60,11 +60,6 @@ else {
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="Orders.php?userName=<?php echo $userName; ?>&custNo=<?php echo $custNo; ?>&<?php if(!empty($cartArr)){echo $cartArr;} ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
-        Orders
-    </a>
-</div>
-<div class="container" align="center" style="margin-top: 20px;">
     <a href="../Interfaces/LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Logout
     </a>
