@@ -44,12 +44,12 @@ else {
     </b>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href=FillPrescription.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href="FillPrescription.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Fill Prescriptions
     </a>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="FillStock.php?userName=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href=FillStock.php?userDets=<?php echo $userDetsQuery; ?>" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Restock
     </a>
 </div>
