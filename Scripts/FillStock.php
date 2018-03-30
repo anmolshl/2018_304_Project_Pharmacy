@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<form action="Restock.php" method="get">
+<form action="Restock.php?userDets=<?php echo $userDetsQuery; ?>" method="get">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
         <b style="font-family: 'American Typewriter'; font-size: 30px">
             <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
