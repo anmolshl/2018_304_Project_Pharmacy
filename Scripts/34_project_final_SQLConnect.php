@@ -30,7 +30,7 @@ else {
     </b>
 </div>
 <div align="center" >
-    <b style="font-family: 'American Typewriter'; font-size: 15px">Online drug reservation system</b>
+    <b style="font-family: 'American Typewriter'; font-size: 15px">Online drug information system</b>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
     <a href="../Interfaces/34_project_final_LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
