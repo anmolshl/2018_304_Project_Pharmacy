@@ -6,21 +6,21 @@
 <body>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
     <b style="font-family: 'American Typewriter'; font-size: 30px">
-        <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+        <a href="34_project_final_SQLConnect.php" style="text-decoration: none; color: #000000;">
             PharmTech
         </a>
     </b>
 </div>
 <div class="container" align="center">
-    <form action="RegCustDatRetr.php" method="get">
+    <form action="34_project_final_RegCustDatRetr.php" method="get">
         <input id="search_key" type="text" name="search_key" placeholder="Enter drug name" style="width: 200px">
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
-    <form action="RegCustDatRetr.php" method="get">
+    <form action="34_project_final_RegCustDatRetr.php" method="get">
         <input id="diseasecount_key" type="text" name="diseasecount_key" placeholder="Count of DrugType in System" style="width: 200px">
         <input type="submit" name="submit" style="width: 70px; margin-right: 10px">
     </form>
-    <form method="get" action="RegCustDatRetr.php">
+    <form method="get" action="34_project_final_RegCustDatRetr.php">
         <select name="Queries">
             <option value="1">Drug Prices</option>
             <option value="2">Pathogen Treatment Costs</option>
@@ -28,7 +28,7 @@
         </select>
         <input type="submit" value="Submit"/>
     </form>
-    <form method="get" action="RegCustDatRetr.php">
+    <form method="get" action="34_project_final_RegCustDatRetr.php">
         <select name="Criteria">
             <option value="Min">Min</option>
             <option value="Max">Max</option>
@@ -47,7 +47,7 @@
 
 </body>
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 
 $conn = oraConnect();
 if (!$conn) {

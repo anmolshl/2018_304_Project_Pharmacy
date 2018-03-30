@@ -5,16 +5,16 @@
     <title>Pharmtech - Restock</title>
 </head>
 <body>
-<form action="FillStock.php?userDets=<?php echo $userDetsQuery; ?>" method="get">
+<form action="34_project_final_FillStock.php?userDets=<?php echo $userDetsQuery; ?>" method="get">
     <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
         <b style="font-family: 'American Typewriter'; font-size: 30px">
-            <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+            <a href="34_project_final_SQLConnect.php" style="text-decoration: none; color: #000000;">
                 PharmTech
             </a>
         </b>
     </div>
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 $conn = oraConnect();
 if (!$conn) {
     exit;

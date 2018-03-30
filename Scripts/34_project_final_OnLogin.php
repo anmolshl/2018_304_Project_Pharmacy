@@ -7,8 +7,8 @@
  * Date: 2018-02-18
  * Time: 9:06 PM
  */
-require "PasswordScripts.php";
-require "SQLQuery.php";
+require "34_project_final_PasswordScripts.php";
+require "34_project_final_SQLQuery.php";
 //Get data from HTML form
 $userName = str_replace(' ', '', $_GET['userName']);
 $password = str_replace(' ', '', $_GET['password']);
@@ -54,7 +54,7 @@ else {
                 if($employeeCheck === 1){
                     array_push($userDets, $userName);
                     $userDetsQuery = http_build_query($userDets);
-                    header("Location: EmpDisp.php?".$userDetsQuery);
+                    header("Location: 34_project_final_EmpDisp.php?".$userDetsQuery);
                     echo "herex";
                 }
                 else{
@@ -67,10 +67,10 @@ else {
             }
         }
         if($checkPass == 0){
-            header('Location: ../Interfaces/LoginPageWrongPass.html');
+            header('Location: ../Interfaces/34_project_final_LoginPageWrongPass.html');
         }
     }
     if($i == 0){
-        header('Location: ../Interfaces/LoginPageNoUser.html');
+        header('Location: ../Interfaces/34_project_final_LoginPageNoUser.html');
     }
 }

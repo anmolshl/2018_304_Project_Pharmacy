@@ -17,20 +17,20 @@ $custNo = $_GET['custNo'];
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
         ?>
-        <form action='SearchPage.php' method='get'>
+        <form action='34_project_final_SearchPage.php' method='get'>
         <?php echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         ?>
         </form>
-        <?php echo "<form action='SearchPage.php' method='get'>\n";
+        <?php echo "<form action='34_project_final_SearchPage.php' method='get'>\n";
         echo "<input id='count_key' type='text' name='count_key' placeholder='Enter drugType' style=\"width: 200px\">\n";
         echo "<input type='hidden' name='userName' value='".htmlentities($userName,ENT_QUOTES)."'>\n";
         echo "<input type='hidden' name='custNo' value='".htmlentities($custNo,ENT_QUOTES)."'>\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
-        echo "<form action='SearchPage.php' method='get'><div style='margin: 0;padding: 0'>\n";
+        echo "<form action='34_project_final_SearchPage.php' method='get'><div style='margin: 0;padding: 0'>\n";
         echo "<div>";
         //echo "<label for='min'>Min Price</label>";
         echo "<input id='min_key' type='text' name='min_key'  placeholder='Min Price' style=\"width: 100px\">\n";
@@ -41,17 +41,17 @@ $custNo = $_GET['custNo'];
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
         echo "<div class=\"container\" align=\"center\" style=\"margin-top: 20px;\">";
-        echo "<a href=\"../Interfaces/LoginPage.html\" style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Logout</a>";
+        echo " style=\\";
         echo "</div>\n";
     }
     else{
         echo "<div align=\"center\" style=\"margin-bottom: 40px; margin-top: 20px; background-color: red\">";
         echo "<b style=\"font-family: 'American Typewriter'; font-size: 30px\">";
-        echo "<a href=\"SQLConnect.php\" style=\"text-decoration: none; color: #000000;\">PharmTech</a>";
+        echo " style=\\";
         echo "</b>";
         echo "</div>";
         echo "<div class=\"container\" align=\"center\">";
-        echo "<form action='SearchPage.php?' method='get'>\n";
+        echo "<form action='34_project_final_SearchPage.php?' method='get'>\n";
         echo "<input id='search_key' type='text' name='search_key' placeholder='Enter drug name' style=\"width: 200px\">\n";
         echo "<input type=\"submit\" name=\"submit\" style=\"width: 70px; margin-right: 10px\">\n";
         echo "</form>";
@@ -60,7 +60,7 @@ $custNo = $_GET['custNo'];
     </div>
 </body>
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 
 $conn = oraConnect();
 if (!$conn) {

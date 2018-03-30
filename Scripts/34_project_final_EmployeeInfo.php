@@ -5,7 +5,7 @@
  * Date: 28/03/2018
  * Time: 23:59
  */
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 
 $userName = $_GET[$userName];
 $password = $_GET[$password];

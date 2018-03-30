@@ -1,6 +1,6 @@
 
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 $conn = oraConnect();
 if (!$conn) {
     exit;
@@ -20,7 +20,7 @@ VALUES('" . $refill . "','" . $expire . "','" . $cnum . "','" . $name . "','" . 
     $prescriptioninsParse = oci_parse($conn, $prescriptioninsQuery);
     insertQuery($conn, $prescriptioninsParse);
     oci_close($conn);
-    header("Location: FillPrescription.php");
+    header("Location: 34_project_final_FillPrescription.php");
 }
 
 

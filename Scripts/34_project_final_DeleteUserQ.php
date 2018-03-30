@@ -1,6 +1,6 @@
 
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 $conn = oraConnect();
 if (!$conn) {
     exit;
@@ -20,5 +20,5 @@ else {
     $deleteParse = oci_parse($conn, $deleteQuery);
     oci_execute($deleteParse);
 
-    header("Location: DeleteUser.php");
+    header("Location: 34_project_final_DeleteUser.php");
 }

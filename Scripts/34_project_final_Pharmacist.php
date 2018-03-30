@@ -5,10 +5,10 @@
     <title>Pharmtech - Prescription</title>
 </head>
 <body>
-    <form action="Prescription.php", method="get">
+    <form action="34_project_final_Prescription.php" , method="get">
         <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
             <b style="font-family: 'American Typewriter'; font-size: 30px">
-                <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+                <a href="34_project_final_SQLConnect.php" style="text-decoration: none; color: #000000;">
                     PharmTech
                 </a>
             </b>
@@ -17,7 +17,7 @@
             <button type="submit">Write Prescription</button>
         </div>
     </form>
-    <form action="Pharmacist.php", method="post">
+    <form action="34_project_final_Pharmacist.php" , method="post">
         <div class="container" align="center" style="margin-top: 20px;">
             <input name="p_num" type="number" placeholder="Prescription Number">
             <button  type="submit">Read Prescription</button>
@@ -36,7 +36,7 @@
         </div>
     </form>
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 $conn = oraConnect();
 if (!$conn) {
     exit;

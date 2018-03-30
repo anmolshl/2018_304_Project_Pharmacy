@@ -7,4 +7,4 @@
  */
 
 session_abort();
-header("Location: SQLConnect.php");
+header("Location: 34_project_final_SQLConnect.php");

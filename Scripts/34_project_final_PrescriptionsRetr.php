@@ -7,13 +7,13 @@
 <h1 style="color: #001111;">Prescriptions</h1>
 <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
     <b style="font-family: 'American Typewriter'; font-size: 30px">
-        <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+        <a href="34_project_final_SQLConnect.php" style="text-decoration: none; color: #000000;">
             PharmTech
         </a>
     </b>
 </div>
 <div class="container" align="center" style="margin-top: 20px;">
-    <a href="../Interfaces/LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+    <a href="../Interfaces/34_project_final_LoginPage.html" style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
         Logout
     </a>
 </div>
@@ -21,7 +21,7 @@
 
 
 <?php
-require "SQLQuery.php";
+require "34_project_final_SQLQuery.php";
 
 $userName = $_GET['userName'];
 $password = $_GET['custNo'];

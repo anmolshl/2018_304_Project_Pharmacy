@@ -5,8 +5,8 @@
  * Date: 2018-03-12
  * Time: 12:30 PM
  */
-require "PasswordScripts.php";
-require "SQLQuery.php";
+require "34_project_final_PasswordScripts.php";
+require "34_project_final_SQLQuery.php";
 $password1 = $_GET['password1'];
 $password2 = $_GET['password2'];
 $username = $_GET['userName'];
@@ -26,7 +26,7 @@ else {
         $i = 0;
         while ($row = oci_fetch_array($userCheckOci, OCI_ASSOC + OCI_RETURN_NULLS)) {
             ++$i;
-            header('Location: ../Interfaces/CustomerSignUpUserTaken.html');
+            header('Location: ../Interfaces/34_project_final_CustomerSignUpUserTaken.html');
         }
         if($i == 0){
             $registerQueryUserTab = "insert into UserTab(username, password) VALUES ('" . $username . "', '" . $password1 . "')";
@@ -54,12 +54,12 @@ else {
             oci_bind_by_name($regCustOci, ":custNo", $cust_no);
             insertQuery($conn, $regCustOci);
             oci_close($conn);
-            header('Location: ../Interfaces/LoginPage.html');
+            header('Location: ../Interfaces/34_project_final_LoginPage.html');
         }
     }
     else{
         echo "\nPasswords entered do not match!\n";
-        header('Location: ../Interfaces/CustomerSignUpPassMismatch.html');
+        header('Location: ../Interfaces/34_project_final_CustomerSignUpPassMismatch.html');
     }
 }
 ?>
