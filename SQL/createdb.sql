@@ -10347,23 +10347,3 @@ INSERT INTO drug_cures_illness(illness_name, drug_name) VALUES('Murdering Syndro
 INSERT INTO drug_cures_illness(illness_name, drug_name) VALUES('Hemorrhagic Fever', 'Ocaliva');
 INSERT INTO drug_cures_illness(illness_name, drug_name) VALUES('Sociopathy', 'Tramadol');
 INSERT INTO drug_cures_illness(illness_name, drug_name) VALUES('Schizophrenia', 'Fosinopril');
-
-
-
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Mint-Acitretin','P',236,'013221',150,1730,'Thirst');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Ach-Olmesartan','P',281,'013032',46,3657,'Coma');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Pharma-Amlodipine','P',470,'003550',299,626,'Having a waifu');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Pharma-Ramipril','P',594,'003550',207,1026,'Bipolar Disorder');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Pharma-Escitalopram','P',440,'003550',291,1804,'Vampirism');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Prevymis','P',429,'012250',46,677,'Black Plague');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Tramadol/Acet','P',287,'017197',175,3448,'ADHD');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Gln-Olmesartan','P',216,'016778',281,1081,'Coma');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Pharma-Simvastatin','P',279,'003550',15,1491,'Having a waifu');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Sandoz','P',89,'012027',265,1774,'Gout');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Auro-Metronidazole','P',47,'011979',42,2847,'Nosebleed');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Sandoz','P',554,'012027',324,589,'Arthritis');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Auro-Cephalexin','P',242,'011979',199,1131,'Having a waifu');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Taro-Dipyridamole/','P',531,'005241',99,60,'LG syndrome');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('M-Atorvastatin','P',288,'013936',264,1483,'Murdering Syndrome');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('M-Venlafaxine','P',188,'013936',83,1458,'Asthma');
-INSERT INTO Drugs(drug_name,drugType,price,manufacturer,max_dosage,quantity,illness_name) VALUES ('Oligostim','O',464,'004054',101,2975,'Obesity');
