@@ -40,7 +40,7 @@ if(!(empty($userName) && empty($custNo))){
     //echo "<input id='min_key' type='text' name='min_key'  placeholder='Min Price' style=\"width: 100px\">\n";
     echo "<select name=\"Queries\"  style=\"width: 100px\">\n";
     echo "<option value=\"1\">Pathogen Treatment Costs</option>\n";
-    echo "<option value=\"2\">Pathogen Treatment Options</option>\n";
+    echo "<option value=\"2\">Symptom Treatability </option>\n";
     echo "</select>\n";
     echo "<select name=\"MinMax\"  style=\"width: 100px\">\n";
     echo "<option value=\"Min\">Min</option>\n";
@@ -222,6 +222,115 @@ else {
                 break;
 
             case 2:
+                $drugRetr = "with compact as (
+SELECT Symptom.symptom, listagg(Illness_has_symptom.illness_name, ',') 
+WITHIN GROUP (ORDER BY Illness_has_symptom.illness_name) as Illnesses
+FROM Symptom, Illness_has_symptom
+        WHERE Symptom.symptom=Illness_has_symptom.symptom
+        GROUP BY Symptom.symptom
+),
+counts as (
+select count(drug_name) as num,
+	Illness.pathogen as patho
+	from Drugs, Illness_has_symptom, Illness
+	where Drugs.illness_name = Illness_has_symptom.illness_name 
+	and Illness.illness_name = Drugs.illness_name
+	group by Illness.pathogen
+),
+agg as (
+select sum(counts.num) as sympamount,
+	Illness_has_symptom.symptom as symptom
+	from counts, Illness, Illness_has_symptom
+	where counts.patho = Illness.pathogen 
+	and Illness.illness_name = Illness_has_symptom.illness_name
+	group by Illness_has_symptom.symptom
+)
+select compact.Symptom, description, compact.Illnesses, agg.sympamount
+from compact, Symptom, counts, agg
+where compact.Symptom = Symptom.symptom and agg.symptom = Symptom.symptom
+and agg.sympamount = (select ". $aggregate."(agg.sympamount) from agg)
+group by compact.Symptom, description, compact.Illnesses, agg.sympamount
+ORDER by agg.sympamount DESC";
+                $ociQuery = oci_parse($conn, $drugRetr);
+                selectQuery($conn, $ociQuery);
+                if ($WordSearch != null) {
+                    echo "<table border='1' align='center'>\n";
+                    echo "<tr>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Symptom</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Description</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illnesses</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Count</td>\n";
+                    echo "</tr>\n";
+                }
+                while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                    echo "<tr>\n";
+                    $item0 = null;
+                    $validRow = 0;
+                    $rowArr = array();
+                    foreach ($row as $item) {
+                        $validRow = 1;
+                        $item0 = $item;
+                        echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                        array_push($rowArr, $item);
+                    }
+                    echo "</tr>\n";
+                }
+                echo "</table>\n";
+
+                $drugRetr = "with compact as (
+SELECT Symptom.symptom, listagg(Illness_has_symptom.illness_name, ',') 
+WITHIN GROUP (ORDER BY Illness_has_symptom.illness_name) as Illnesses
+FROM Symptom, Illness_has_symptom
+        WHERE Symptom.symptom=Illness_has_symptom.symptom
+        GROUP BY Symptom.symptom
+),
+counts as (
+select count(drug_name) as num,
+	Illness.pathogen as patho
+	from Drugs, Illness_has_symptom, Illness
+	where Drugs.illness_name = Illness_has_symptom.illness_name 
+	and Illness.illness_name = Drugs.illness_name
+	group by Illness.pathogen
+),
+agg as (
+select sum(counts.num) as sympamount,
+	Illness_has_symptom.symptom as symptom
+	from counts, Illness, Illness_has_symptom
+	where counts.patho = Illness.pathogen 
+	and Illness.illness_name = Illness_has_symptom.illness_name
+	group by Illness_has_symptom.symptom
+)
+select compact.Symptom, description, compact.Illnesses, agg.sympamount
+from compact, Symptom, counts, agg
+where compact.Symptom = Symptom.symptom and agg.symptom = Symptom.symptom
+group by compact.Symptom, description, compact.Illnesses, agg.sympamount
+ORDER by agg.sympamount DESC";
+                $ociQuery = oci_parse($conn, $drugRetr);
+                selectQuery($conn, $ociQuery);
+                if ($WordSearch != null) {
+                    echo "<table border='1' align='center'>\n";
+                    echo "<tr>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Symptom</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Description</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Illnesses</td>\n";
+                    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Drug Count</td>\n";
+                    echo "</tr>\n";
+                }
+                while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                    echo "<tr>\n";
+                    $item0 = null;
+                    $validRow = 0;
+                    $rowArr = array();
+                    foreach ($row as $item) {
+                        $validRow = 1;
+                        $item0 = $item;
+                        echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                        array_push($rowArr, $item);
+                    }
+                    echo "</tr>\n";
+                }
+                echo "</table>\n";
+
         }
 
     }
