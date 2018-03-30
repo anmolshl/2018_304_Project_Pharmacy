@@ -54,23 +54,23 @@ else {
                 if($employeeCheck === 1){
                     array_push($userDets, $userName);
                     $userDetsQuery = http_build_query($userDets);
-                    //header("Location: EmpDisp.php?".$userDetsQuery);
+                    header("Location: EmpDisp.php?".$userDetsQuery);
                     echo "herex";
                 }
                 else{
                     array_push($userDets, $userName);
                     array_push($userDets, $custNo);
                     $userDetsQuery = http_build_query($userDets);
-                    //header("Location: RegDisp.php?".$userDetsQuery);
+                    header("Location: RegDisp.php?".$userDetsQuery);
                 }
                 break;
             }
         }
         if($checkPass == 0){
-            //header('Location: ../Interfaces/LoginPageWrongPass.html');
+            header('Location: ../Interfaces/LoginPageWrongPass.html');
         }
     }
     if($i == 0){
-        //header('Location: ../Interfaces/LoginPageNoUser.html');
+        header('Location: ../Interfaces/LoginPageNoUser.html');
     }
 }

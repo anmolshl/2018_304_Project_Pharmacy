@@ -19,7 +19,7 @@
         <input name="refill" type="number" min="0" name="refill" placeholder="Refill" required>
     </div>
     <div class="container" align="center">
-        <input name="expire" type="date" name="expire" placeholder="Expiration" required>
+        <input name="expire" type="date" name="expire" placeholder="Expiration (YYYY-MM-DD)" required>
     </div>
     <div class="container" align="center">
         <input name="c_num" type="number" name="c_num" placeholder="Customer Number" required>
@@ -28,7 +28,7 @@
         <input name="u_name" type="text" name="u_name" placeholder="Customer Name" required>
     </div>
     <div class="container" align="center">
-        <input name="issued_d" type="date" name="issued_d" placeholder="Issued Date" required>
+        <input name="issued_d" type="date" name="issued_d" placeholder="Issued Date (YYYY-MM-DD)" required>
     </div>
     <div class="container" align="center" style="margin-top: 20px;">
         <button type="submit">Submit</button>

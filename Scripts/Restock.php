@@ -1,4 +1,18 @@
+<html lang="en" style="background-color: beige">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmtech - Restock</title>
+</head>
+<body>
+<form action="FillStock.php?userDets=<?php echo $userDetsQuery; ?>" method="get">
+    <div align="center" style="margin-bottom: 40px; margin-top: 20px; background-color: red">
+        <b style="font-family: 'American Typewriter'; font-size: 30px">
+            <a href="SQLConnect.php" style="text-decoration: none; color: #000000;">
+                PharmTech
+            </a>
+        </b>
+    </div>
 <?php
 require "SQLQuery.php";
 $conn = oraConnect();
@@ -6,7 +20,7 @@ if (!$conn) {
     exit;
 }
 else {
-    $restock = $_GET['quantity'];
+    $restock = (int)$_GET['quantity'];
     $drug_name = $_GET['drug_name'];
     echo "$restock\n";
     echo "$drug_name\n";
@@ -18,19 +32,45 @@ else {
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
         echo "<tr>\n";
         foreach ($row as $item) {
-            $fetch = $item + $restock;
+            $fetch = (int)$item + $restock;
             echo "$item\n";
         }
     }
-    echo "$fetch\n";
-    $restockQuery = "UPDATE Drugs SET quantity = '" . $fetch . "' WHERE drug_name = '" . $drug_name . "'";
+    echo $fetch."\n";
+    $restockQuery = "UPDATE Drugs SET quantity=" . (string)$fetch . " WHERE drug_name='" . $drug_name ."'";
     $restockParse = oci_parse($conn, $retstockQuery);
-    oci_bind_by_name($restockParse, 'table', $table);
-    $result = oci_execute($restockPars, OCI_COMMIT_ON_SUCCESS);
-    if (!$result) {
-        echo oci_error();
-    }
+    insertQuery($conn, $restockParse);
+    oci_close($conn);
 }
+?>
+    <div align="center" style="margin-bottom: 40px; margin-top: 20px;">
+        <table align="center" border="1">
+            <tr>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    Drug Name
+                </td>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    <?php echo $drug_name; ?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    Old Quantity
+                </td>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    <?php echo $fetch - $restock; ?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    New Quantity
+                </td>
+                <td style="text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';">
+                    <?php echo $fetch; ?>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 
 

@@ -20,6 +20,7 @@ VALUES('" . $refill . "','" . $expire . "','" . $cnum . "','" . $name . "','" . 
     $prescriptioninsParse = oci_parse($conn, $prescriptioninsQuery);
     insertQuery($conn, $prescriptioninsParse);
     oci_close($conn);
+    header("Location: FillPrescription.php");
 }
 
 

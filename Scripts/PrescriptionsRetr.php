@@ -23,8 +23,8 @@
 <?php
 require "SQLQuery.php";
 
-$userName = $_GET[$userName];
-$password = $_GET[$password];
+$userName = $_GET['userName'];
+$password = $_GET['custNo'];
 $conn = oraConnect();
 if (!$conn) {
     exit;
@@ -38,15 +38,15 @@ else {
     $ociQuery = oci_parse($conn, $PrescriptionQuery);
     oci_execute($ociQuery);
     selectQuery($conn, $ociQuery);
-    echo "<table border='1'>\n";
+    echo "<table border='1' align='center'>\n";
     echo "<tr>\n";
-    echo "<td>Expiration</td>\n";
-    echo "<td>Prescription_number</td>\n";
-    echo "<td>Issued Date</td>\n";
+    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Expiration</td>\n";
+    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Prescription_number</td>\n";
+    echo "<td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">Issued Date</td>\n";
     while ($row = oci_fetch_array($ociQuery, OCI_ASSOC + OCI_RETURN_NULLS)) {
         echo "<tr>\n";
         foreach ($row as $item) {
-            echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+            echo "    <td style=\"text-decoration: none; color: #000000; font-size: 15px; font-family: 'American Typewriter';\">" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
         echo "</tr>\n";
     }
