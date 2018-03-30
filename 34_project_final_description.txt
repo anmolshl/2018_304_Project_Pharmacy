@@ -1,0 +1,7 @@
+Description of Final Project
+
+1) Project Final Short Description
+
+The final project that we constructed is a Pharmacist database system with three different types of users: customer, pharmacists, and pharmtechs. The primary difference comes from the customer and pharmacists where what they see differ once logged in. The user is able to View his orders, his prescriptions, and is able to search for drugs that can be ordered later. The Pharmacist on the hand has the ability to write prescriptions and refill stocks if necessary.  The final schema is much more different because we had to simplify many complex structures first established in the initial design for the project.
+
+

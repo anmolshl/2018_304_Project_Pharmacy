@@ -1,0 +1,156 @@
+3) Functional Dependencies
+
+Customer(customer_number, name, address, dob, username)
+
+PRIMARY KEY: customer_number + username
+FOREIGN KEY: username References User(username)
+FD RELATION: (customer_number, name) -> (name, address, dob, username)
+
+
+BCNF,  customer_number, name is a superkey
+
+Unregistered_Customer(customer_number, username)
+
+PRIMARY KEY: customer_number
+FOREIGN KEY: customer_number References Customer(customer_number)
+CANDIDATE KEY: username
+
+Registered_Customer(customer_number, username)
+
+PRIMARY KEY: username
+FOREIGN KEY: username References User(username)
+CANDIDATE KEY: customer_number
+User(username, password)
+ PRIMARY KEY: username
+FD RELATION:  (username) -> (password)
+
+BCNF,  trivial case
+Drugs(drug_name, manufacturer, max_dosage, price)
+
+PRIMARY KEY: drug_name
+
+FD RELATION: (drug_name) -> (manufacturer, max_dosage, price)
+
+
+BCNF,  only one key. Drug name is required to determine the rest.
+
+
+
+
+
+Illness(illness_name, pathogen, duration)
+
+PRIMARY KEY: illness_name
+
+FD RELATION: (illness_name) -> (pathogen, duration)
+
+BCNF,  trivial case
+Pharmtech(name, employee_id, username)
+
+PRIMARY KEY: employee_id
+FOREIGN KEY: username References User(username)
+CANDIDATE KEY: username
+FD RELATION:  (name) -> (employee_id, username)
+(username) -> (name, employee_id)
+
+BCNF, username+ name is a superkey
+Prescription(refill, expiration, customer_number, prescription_number, issued_date)
+
+PRIMARY KEY:prescription_number
+FOREIGN KEY: customer_number References Customer(customer_number)
+
+FD RELATION: (prescription_number) -> (refill, expiration, customer_number, prescription_number, issued_date)
+
+BCNF, prescription_number is a superkey
+Store(store_location, store_address)
+
+PRIMARY KEY: store_location + store_address
+
+
+
+Stock(stockI.D.)
+
+PRIMARY KEY: stock_I.D.
+
+Side_effects(effect, description)
+
+PRIMARY KEY: effect
+
+FD RELATION: (effect) -> (description)
+
+BCNF: Trivial case
+
+Symptom(symptom, description)
+
+PRIMARY KEY: symptom
+
+FD RELATION: (symptom) -> ( description)
+
+BCNF,  trivial case
+Warning(warning, description)
+
+PRIMARY KEY: warning
+
+FD RELATION: (warning) -> (description)
+
+BCNF,  trivial case
+Pharmacist(username, access)
+
+PRIMARY KEY: username
+FOREIGN KEY: username References Pharmtech(username)
+CANDIDATE KEY: access
+FD RELATION: (username) -> (access)
+
+BCNF,  trivial case
+
+
+Schema: Relationships
+
+
+pharmacist_writes_prescription(employee_id, prescription_number)
+
+PRIMARY KEY: employee_id + prescription_number
+FOREIGN KEY: employee_id References Pharmacist(employee_id)
+FOREIGN KEY: prescription_number References Prescription(prescription_number)
+
+drug_cures_illness(illness_name, drug_name)
+
+PRIMARY KEY: illness_name + drug_name
+FOREIGN KEY: illness_name References Illness(illness_name)
+FOREIGN KEY: drug_name References Drug(drug_name)
+drug_has_warning(warning, drug_name)
+
+PRIMARY KEY: warning + drug_name
+FOREIGN KEY: warning References Warning(warning)
+Illness_has_symptom(symptom, illness_name)
+
+PRIMARY KEY: symptom + illness_name
+FOREIGN KEY: symptom References Symptom(symptom)
+FOREIGN KEY: illness_name References Illness(illness_name)
+drugs_has_side_effects(effect, drug_name)
+
+PRIMARY KEY: effect + drug_name
+FOREIGN KEY: effect References Side_effect(effect)
+FOREIGN KEY: drug_name References Drug(drug_name)
+stock_stores_drugs(quantity, stockID, drug_name)
+
+PRIMARY KEY: stockID
+FOREIGN KEY: stockID References Stock(stockID)
+FOREIGN KEY: drug_name References Drug(drug_name)
+stores_contains_stocks(stockID, store_location, store_address)
+
+PRIMARY KEY: stockID + store_location + store_address
+FOREIGN KEY: store_location References Store(store_location)
+FOREIGN KEY: store_address References Store(store_address)
+FOREIGN KEY: stockID References Stock(stockID)
+Prescription_orders(refill, expiration, customer_number, prescription_number, issued_date, dosage)
+
+PRIMARY KEY: prescription_number
+FOREIGN KEY: store_location REFERENCES Store(store_location),
+FOREIGN KEY: store_address REFERENCES Store(store_address),
+FOREIGN KEY: drug_name REFERENCES Drug(drug_name)
+customer_has_prescription(customer_number, prescription_number)
+
+PRIMARY KEY: customer_number + prescription_number
+FOREIGN KEY: customer_number REFERENCES Customer(customer_number)
+FOREIGN KEY: prescription_number REFERENCES Prescription(prescription_number)

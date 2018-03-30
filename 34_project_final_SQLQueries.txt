@@ -1,0 +1,130 @@
+2) Queries Utilized in the Code for Retrieval and sending data (excluding all data population code)
+
+
+$EmoloyeeQuery = "SELECT * FROM Pharmtech WHERE name = '".$name."'";
+
+$employeeCheckQuery = "select username from Pharmtech where username = '".$userName."'";
+
+$custNoQuery = "select customer_number from RegCustomer where username='".$userName."'";
+
+$passwordQuery = "select password from UserTab where username='".$userName."'";
+
+$usernameCheckQuery = "select username from userTab where username='" . $username . "'";
+
+$registerQueryUserTab = "insert into UserTab(username, password) VALUES ('" . $username . "', '" . $password1 . "')";
+
+$custNoCheckQuery = "select customer_number from RegCustomer where customer_number= :custNo";
+
+$registerQueryCust = "insert into Customer(name, address, dob, username, customer_number) values ('" . $name . "', '" . $address . "', to_date
+
+$registerQueryRegCust = "insert into RegCustomer(customer_number, username) values (:custNo, '" . $username . "')";
+
+$PrescriptionQuery = "SELECT drug_name, refill, expiration, prescription_number, issued_date, dosage FROM Prescription_orders WHERE username = '".$userName."'";
+
+$query = "select * from Drugs where drug_name = '".$d_name."'";
+
+$query = "select * from Stock where stock_ID = $s_id";
+
+$query = "select * from Customer where customer_number = $c_num";
+
+$prescriptioninsQuery = "INSERT INTO Prescription(refill, expiration, customer_number, username, prescription_number, issued_date)
+
+$drugRetr = "SELECT drug_name, drugType, illness_name, price FROM Drugs WHERE drug_name='" . $WordSearch . "'";
+
+$drugRetr = "select count(drugType) from Drugs where drugType = '" . $WordSearch . "'";
+
+$retrstockQuery = "SELECT quantity FROM Drugs WHERE drug_name='" . $drug_name . "'";
+
+$restockQuery = "UPDATE Drugs SET quantity = '" . $fetch . "' WHERE drug_name = '" . $drug_name . "'";
+
+
+ $drugRetr = "SELECT drug_name, drugType, price, illness_name FROM Drugs
+WHERE price >= (SELECT Min(" . $WordSearch . ") FROM Drugs) AND
+price <= (SELECT Max(" . $maxsearch . ") FROM Drugs) ORDER BY price DESC";
+
+
+$drugRetr = "select drug_name, drugType, price, illness_name from Drugs
+where price >= (select Max(". $maxsearch.") from Drugs) ORDER BY price DESC";
+
+  $drugRetr = "select drug_name, drugType, price, illness_name from Drugs
+where price >= (select Min(". $WordSearch.") from Drugs) ORDER BY price DESC";
+
+$drugRetr = "SELECT illness_name, pathogen, duration FROM Illness WHERE pathogen='" . $WordSearch . "'";
+
+$drugRetr = "SELECT illness_name, pathogen, duration FROM Illness WHERE illness_name='" . $WordSearch . "'";
+
+$drugRetr = "SELECT Symptom.symptom, description
+FROM Symptom
+WHERE Symptom.symptom ='" . $WordSearch . "'";
+
+$drugRetr = "select Round(avg(price), 2) as avgprice, Illness.pathogen as patho from Drugs, Illness
+where Drugs.illness_name = Illness.illness_name group by Illness.pathogen order by avgprice desc";
+
+$query = "select * from Stock where stock_ID = '".$s_id."'";
+
+$query = "insert into stock_stores_drugs VALUES ('".$_GET['drug_add']."','".$_GET['drug_name']."','".$_GET['stock_ID']."')";
+
+$query = "select * from Stock where stock_ID = '".$s_id."'"
+
+SELECT Symptom.symptom, listagg(Illness_has_symptom.illness_name, ',')
+WITHIN GROUP (ORDER BY Illness_has_symptom.illness_name) as Illnesses
+FROM Symptom, Illness_has_symptom
+        WHERE Symptom.symptom=Illness_has_symptom.symptom
+        GROUP BY Symptom.symptom
+),
+counts as (
+select count(drug_name) as num,
+	Illness.pathogen as patho
+	from Drugs, Illness_has_symptom, Illness
+	where Drugs.illness_name = Illness_has_symptom.illness_name
+	and Illness.illness_name = Drugs.illness_name
+	group by Illness.pathogen
+),
+agg as (
+select sum(counts.num) as sympamount,
+	Illness_has_symptom.symptom as symptom
+	from counts, Illness, Illness_has_symptom
+	where counts.patho = Illness.pathogen
+	and Illness.illness_name = Illness_has_symptom.illness_name
+	group by Illness_has_symptom.symptom
+)
+select compact.Symptom, description, compact.Illnesses, agg.sympamount
+from compact, Symptom, counts, agg
+where compact.Symptom = Symptom.symptom and agg.symptom = Symptom.symptom
+and agg.sympamount = (select ". $aggregate."(agg.sympamount) from agg)
+group by compact.Symptom, description, compact.Illnesses, agg.sympamount
+ORDER by agg.sympamount DESC";
+
+SELECT Symptom.symptom, listagg(Illness_has_symptom.illness_name, ',')
+WITHIN GROUP (ORDER BY Illness_has_symptom.illness_name) as Illnesses
+FROM Symptom, Illness_has_symptom
+        WHERE Symptom.symptom=Illness_has_symptom.symptom
+        GROUP BY Symptom.symptom
+),
+counts as (
+select count(drug_name) as num,
+	Illness.pathogen as patho
+	from Drugs, Illness_has_symptom, Illness
+	where Drugs.illness_name = Illness_has_symptom.illness_name
+	and Illness.illness_name = Drugs.illness_name
+	group by Illness.pathogen
+),
+agg as (
+select sum(counts.num) as sympamount,
+	Illness_has_symptom.symptom as symptom
+	from counts, Illness, Illness_has_symptom
+	where counts.patho = Illness.pathogen
+	and Illness.illness_name = Illness_has_symptom.illness_name
+	group by Illness_has_symptom.symptom
+)
+select compact.Symptom, description, compact.Illnesses, agg.sympamount
+from compact, Symptom, counts, agg
+where compact.Symptom = Symptom.symptom and agg.symptom = Symptom.symptom
+group by compact.Symptom, description, compact.Illnesses, agg.sympamount
+ORDER by agg.sympamount DESC";
+
+$deleteQuery = "DELETE FROM Customer WHERE username='".$name."'";
+
+$deleteQuery = "DELETE FROM RegCustomer WHERE username='".$name."'";
+
+$deleteQuery = "DELETE FROM UserTab WHERE username='".$name."'";
